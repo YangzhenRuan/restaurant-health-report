@@ -80,7 +80,7 @@ The budgets below keep every page on one sheet. They are approximate; `render_pd
   - `{"mode": "cents", "per_sale": 0.10, "volumes": [{"label", "count"}]}`: count defaults to 1,500 / 3,000 / 4,500 card sales a month.
   - `{"mode": "percent", "points": 0.25, "monthly_sales": [{"label", "amount"}]}`: amount defaults to $40k / $70k / $100k of card sales a month.
   - `{"mode": "none"}` hides the table.
-- `actual`: optional, the owner's own statement: `{monthly_sales, monthly_fees, transactions?, processor?}`. Adds a "Your real rate" box (effective rate, year, per sale, average ticket); the build prints them under `card_fees.actual`. With it, the savings table is off unless `savings.mode` is set.
+- `actual`: optional, the owner's own statement: `{monthly_sales, monthly_fees, transactions?, processor?, quoted?}`. `quoted` is the rate they were sold, `{percent, fixed}` (e.g. `{"percent": 2.5, "fixed": 0.08}`; a fixed fee needs `transactions`); the box then shows what the fees would be at that rate and the gap, printed as `quoted`, `expected_fees`, `gap`, `gap_per_year`. Adds a "Your real rate" box (effective rate, year, per sale, average ticket); the build prints them under `card_fees.actual`. With it, the savings table is off unless `savings.mode` is set.
 - `rules_title`: for example "DC rules to work within".
 - `rules_text`: ≤ 320 characters, from `references/state-rules.md`.
 - `unknowns_text`: ≤ 280 characters.

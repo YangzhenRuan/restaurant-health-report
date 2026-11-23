@@ -443,11 +443,26 @@ def sec_card_fees(d):
         if a_tx > 0:
             bits += [f"{money(a_fees / a_tx)} per card sale", f"{money(a_sales / a_tx)} average ticket"]
         who = f" · processed by {esc(actual['processor'])}" if actual.get("processor") else ""
+        # The rate the owner was quoted vs. what the statement shows: the gap is monthly, PCI or
+        # statement fees, or card types billed above the quoted rate.
+        quoted, gap_line, gap_out = actual.get("quoted"), "", {}
+        if quoted:
+            q_pct, q_fx = float(quoted.get("percent", 0)), float(quoted.get("fixed", 0))
+            if q_fx and a_tx <= 0:
+                raise SystemExit("data.json: card_fees.actual.quoted has a fixed fee, so actual.transactions is needed")
+            expected = a_sales * q_pct / 100 + a_tx * q_fx
+            gap = a_fees - expected
+            q_label = f"{q_pct:g}%" + (f" + {q_fx * 100:g}¢" if q_fx else "")
+            gap_line = (f'<br>At the quoted {esc(q_label)} the fees would be {money(expected)}; the statement shows '
+                        + (f'<b>{money(gap)} more ({money(gap * 12)} a year)</b>, usually monthly, PCI or statement fees, or cards billed above the quoted rate.'
+                           if gap > 0.005 else 'no more than that.'))
+            gap_out = {"quoted": q_label, "expected_fees": money(expected), "gap": money(gap), "gap_per_year": money(gap * 12)}
         body += (f'<div class="callout" style="margin-bottom:12pt"><div class="lbl">Your real rate</div>'
                  f'<div class="q">{money(a_fees)} in fees on {money(a_sales)} of card sales last month: '
-                 f'<b>{" · ".join(bits)}</b>{who}. From the owner\'s statement.</div></div>')
+                 f'<b>{" · ".join(bits)}</b>{who}. From the owner\'s statement.{gap_line}</div></div>')
         actual_out = {"effective": pct(a_rate), "per_year": money(a_fees * 12),
-                      "per_sale": money(a_fees / a_tx) if a_tx > 0 else None, "average_ticket": money(a_sales / a_tx) if a_tx > 0 else None}
+                      "per_sale": money(a_fees / a_tx) if a_tx > 0 else None, "average_ticket": money(a_sales / a_tx) if a_tx > 0 else None,
+                      **gap_out}
     rules = card(d.get("rules_title", "Local rules to work within"), need(d, "rules_text", "card_fees"), "navy")
     unknown = card("What public data can't show", need(d, "unknowns_text", "card_fees"), "orange")
     body += f'<div class="grid2" style="margin-bottom:12pt">{rules}{unknown}</div>'

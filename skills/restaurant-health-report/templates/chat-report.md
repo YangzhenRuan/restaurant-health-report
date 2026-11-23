@@ -28,7 +28,7 @@ Sources: {{links}}
 
 ## 3. Card fees
 
-{{With the owner's numbers: "Your real rate: $X in fees on $Y of card sales = Z% effective, $W a year, $V per sale." Show the division.}}
+{{With the owner's numbers: "Your real rate: $X in fees on $Y of card sales = Z% effective, $W a year, $V per sale." Show the division. With a quoted rate: "At the quoted A% + B¢ the fees would be $E; the statement shows $G more ($G×12 a year)."}}
 
 | Ticket | Fee at 2.6% + 15¢ (example) | Effective rate |
 |---|---|---|

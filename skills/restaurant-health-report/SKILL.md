@@ -53,12 +53,25 @@ Never stop because a capability is missing. Use the fallback, say which one you 
 | A page won't open | Skip it, list it under "Could not open" in `evidence.md`. |
 | Python | Follow `references/chat-mode.md`: fill `templates/chat-report.html` (or `.md` if you can only write text). |
 | Chrome, Edge or WeasyPrint | Deliver `report.html`. It's self-contained and prints to PDF from any browser. |
-| The owner's statement | Use the 2.6% + 15¢ example, labelled as an example, and ask for two numbers: last month's card sales and total fees. |
+| The owner's statement | Use the 2.6% + 15¢ example, labelled as an example, and ask for last month's card sales, total fees and the rate they were quoted. |
 | Delivery-app listings | Drop the `delivery` section. Pages renumber themselves. |
 
-## The owner's own card numbers
+## What the owner tells you: build the report around it
 
-If the person gives last month's statement numbers, put them in `card_fees.actual`: `{monthly_sales, monthly_fees, transactions?, processor?}`. The card-fee page then shows "Your real rate", worked out by the script: effective rate, a year's fees, fee per sale and average ticket. The illustrative savings table is left out. Use the computed values in the prose.
+The person may tell you how the restaurant runs today, often in a block headed "What I told you". Every item is a `client` fact ("From owner"); don't ask again for anything given, and don't contradict it without evidence. Use each one:
+
+| They tell you | Use it to |
+|---|---|
+| Card processor | Name it in the snapshot; read its public pricing page if it has one, and say only what that page says. |
+| Rate as quoted, and how it's priced (flat, interchange-plus, tiered, cash discount or surcharge) | Put it in `card_fees.actual.quoted` `{percent, fixed}`; the script compares it with the statement and shows the gap. Check a cash discount or surcharge against the state rules. |
+| Last month's card sales, total fees, number of card sales | `card_fees.actual` `{monthly_sales, monthly_fees, transactions?, processor?}`: "Your real rate" box (effective rate, a year, per sale, average ticket) replaces the example savings table. |
+| POS | Snapshot fact; don't guess the POS from the outside. Note what it does and doesn't connect to only if its own site says so. |
+| Online ordering, delivery apps | Which ordering pages and apps to price; check the direct link works and is easy to find. |
+| Loyalty, gift cards, marketing texts, reservations, phone ordering, other software | Snapshot facts; they settle the reviews and repeat-guests question and the phone question instead of "Not enough data". |
+| Contract end, early-termination fee, equipment lease | A line in the card-fee page about when switching costs least; link the contract exit cost calculator. |
+| Their biggest worry | Answer it first. Its "where to start" card goes first and the bottom line speaks to it. |
+
+What they tell you beats what you infer: a told fact is `client`, an inferred one is `not_confirmed`. What they don't tell you, research as usual.
 
 ## Workflow
 

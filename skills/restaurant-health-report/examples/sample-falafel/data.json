@@ -258,7 +258,11 @@
       "monthly_sales": 38000,
       "monthly_fees": 1406,
       "transactions": 4100,
-      "processor": "a flat-rate processor"
+      "processor": "a flat-rate processor",
+      "quoted": {
+        "percent": 2.5,
+        "fixed": 0.08
+      }
     }
   },
   "delivery": {

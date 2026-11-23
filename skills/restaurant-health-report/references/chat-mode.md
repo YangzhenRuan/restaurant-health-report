@@ -8,13 +8,14 @@ Base URL for every file below: `https://raw.githubusercontent.com/YangzhenRuan/r
 
 1. Read the **Rules** and **Where to start** parts of `SKILL.md`. They apply here word for word: only facts you saw, honest status tags, no invented prices or claims about any company, browse but never transact.
 2. Skim `references/research-playbook.md` for which sources to check and what to capture.
-3. Use what the person already gave you (restaurant, address, processor, POS, delivery apps, card numbers) as **From owner** facts. Don't ask again for anything they gave.
+3. Use what the person already gave you (usually a "What I told you" block: processor, rate as quoted, POS, online ordering, delivery apps, loyalty and other software, card numbers, contract, biggest worry) as **From owner** facts, and build the report around them as the table "What the owner tells you" in `SKILL.md` says. Their biggest worry is answered first. Don't ask again for anything they gave.
 
 ## Steps
 
 1. **Research.** Search the web and open the pages: the restaurant's own site and ordering page, Google listing, Yelp, the delivery apps, and 3 to 5 nearby restaurants of the same kind. Keep a list of every link you used.
 2. **Do the arithmetic, showing each step** (you have no script to do it):
    - Effective card rate = monthly fees ÷ monthly card sales × 100. A year = monthly fees × 12. Per sale = monthly fees ÷ number of card sales. Average ticket = card sales ÷ number of card sales.
+   - With a quoted rate (say 2.5% + 8¢): fees at that rate = card sales × 0.025 + number of card sales × 0.08. Gap = actual fees − that, and × 12 for a year. A gap is usually monthly, PCI or statement fees, or cards billed above the quoted rate; say only that, not which.
    - Example fee on a ticket at 2.6% + 15¢ = ticket × 0.026 + 0.15. Its effective rate = that fee ÷ ticket × 100. Always label 2.6% + 15¢ as an example.
    - App markup = (app price − direct price) ÷ direct price × 100.
    - What an app keeps on an order = order total × commission (show 15%, 25% and 30%).
