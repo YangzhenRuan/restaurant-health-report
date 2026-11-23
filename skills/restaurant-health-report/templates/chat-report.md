@@ -24,6 +24,12 @@
 - **Guests praise:** {{themes, short real quotes}}
 - **Guests complain about:** {{recurring themes}}
 
+**What reviews point to** (only problems named in 2+ separate reviews; up to 3; drop this if none. The fix text and link are fixed: copy them from chat-mode.md.)
+
+| What guests say | How often | Fix to consider |
+|---|---|---|
+| **{{Long line at lunch}}**: "{{short quote}}" ({{Google}}) | {{4 reviews}} | {{Self-order kiosk: guests order and pay on a bilingual kiosk, and the order goes straight to the kitchen. https://truvanatech.com/self-order-kiosk}} |
+
 Sources: {{links}}
 
 ## 3. Card fees

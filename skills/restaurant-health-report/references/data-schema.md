@@ -55,6 +55,7 @@ The budgets below keep every page on one sheet. They are approximate; `render_pd
   - `channel: "delivery"` colours the bar orange.
 - `themes`: 5–9 items of `{text, negative?}`, each ≤ 40 characters.
 - `competitors`: 3–5 items of `{name, rating, count}`, Google numbers for nearby restaurants of the same kind (see the playbook).
+- `review_signals`: optional, up to 3 of `{theme, count, quote, source, fix, owner_agrees?}`. `fix` is one of `kiosk`, `kds`, `tableside`, `phone`, `online`, `loyalty`, `payments`; `count` ≥ 2 (or 1 with `owner_agrees`); `quote` under 90 characters. Replaces the "Clearly working / Not visible publicly" cards with a "What reviews point to" table, and the theme chips keep only the praise. Rules: `references/review-signals.md`.
   - `own_name` names the restaurant's row.
   - `competitor_area` explains how they were chosen, ≤ 70 characters.
   - The script ranks the restaurant against them and prints `nearby` (rating rank, review rank, nearby average, gap). Use those values in titles and the cover.

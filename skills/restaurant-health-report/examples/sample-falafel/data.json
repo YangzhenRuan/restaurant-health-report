@@ -218,6 +218,22 @@
         "rating": 4.2,
         "count": 2350
       }
+    ],
+    "review_signals": [
+      {
+        "theme": "Long line at lunch",
+        "count": 4,
+        "quote": "Line out the door at noon, 20 minutes just to order",
+        "source": "Google",
+        "fix": "kiosk"
+      },
+      {
+        "theme": "Wrong or missing items",
+        "count": 3,
+        "quote": "Got the wrong bowl, and the fries were missing",
+        "source": "Yelp",
+        "fix": "kds"
+      }
     ]
   },
   "card_fees": {

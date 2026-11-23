@@ -105,6 +105,14 @@ footer a{color:var(--navy);font-weight:600}
     <div class="card"><h3>What guests praise</h3><ul class="tight"><li>{{theme, with a short real quote}}</li></ul></div>
     <div class="card"><h3>What guests complain about</h3><ul class="tight"><li>{{recurring theme}}</li></ul></div>
   </div>
+  <!-- What reviews point to: only problems named in 2+ separate reviews (references/review-signals.md). Up to 3. Delete the block if none.
+       The "fix to consider" cell is FIXED text: pick one from the list in chat-mode.md, with its link, word for word. -->
+  <h3 style="margin-top:18px">What reviews point to</h3>
+  <table>
+    <tr><th>What guests say</th><th>How often</th><th>Fix to consider</th></tr>
+    <tr><td><b>{{Long line at lunch}}</b><br><small>"{{short quote}}" ({{Google}})</small></td><td class="n">{{4 reviews}}</td>
+      <td><b style="color:var(--orange)">{{Self-order kiosk}}</b>: {{guests order and pay on a bilingual kiosk, and the order goes straight to the kitchen.}} <a href="{{https://truvanatech.com/self-order-kiosk}}">See it</a></td></tr>
+  </table>
   <p class="sources">Sources: {{links}}</p>
 </section>
 
@@ -157,6 +165,9 @@ footer a{color:var(--navy);font-weight:600}
     <div class="card"><span class="sig {{unknown}}">{{Not enough data}}</span><h3>Cut delivery-app costs?</h3><p>{{Why}}</p><p><b>First step:</b> {{step}}</p>
       <p class="help"><b>How Truvana Tech can help:</b> online ordering on the restaurant's own website and app, with no commission per order.</p></div>
   </div>
+  <!-- Under the kiosk card, use the KDS line instead when the evidence is wrong orders, or the tableside line for slow table service:
+       <p class="help"><b>How Truvana Tech can help:</b> a kitchen display (KDS) that shows every order on one screen, in English or Spanish.</p>
+       <p class="help"><b>How Truvana Tech can help:</b> handhelds and QR codes, so guests order and pay at the table.</p> -->
   <!-- Optional fifth card, only if reviews or the owner mention missed phone orders:
        <p class="help"><b>How Truvana Tech can help:</b> AI phone answering in English and Spanish, so no order is missed.</p> -->
   <div class="card"><h3>Questions to answer with your own numbers</h3><ol class="tight"><li>{{question}}</li></ol></div>

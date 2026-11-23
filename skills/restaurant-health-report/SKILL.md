@@ -114,9 +114,11 @@ Before writing, decide two things.
 
 Use `strong`, `some`, `low` or `unknown` (not enough data). `unknown` is a good answer; it tells the owner what to measure.
 
-Give each card an `area`: `payments`, `kiosk`, `reputation`, `delivery` or `phone`. On a strong or some signal, the template adds a fixed "How Truvana Tech can help" line for that area: a statement review, a bilingual kiosk with a kitchen display, loyalty and texts, commission-free online ordering, or AI phone answering. Don't write your own version of it. The plan page's title should name the order to start in, for example "Where to start: payments first, then delivery."
+Give each card an `area`: `payments`, `kiosk`, `kds`, `tableside`, `reputation`, `delivery` or `phone`. On a strong or some signal, the template adds a fixed "How Truvana Tech can help" line for that area: a statement review, a bilingual kiosk with a kitchen display, loyalty and texts, commission-free online ordering, or AI phone answering. Don't write your own version of it. The plan page's title should name the order to start in, for example "Where to start: payments first, then delivery."
 
 Pick a cover headline that is short, true and specific. For example: "The demand is proven. The margin is in the small print."
+
+**What reviews point to.** Read the reviews for operations problems guests keep naming: long lines, wrong or missing orders, slow table service, an unanswered phone. When one comes up in at least 2 separate reviews, add it to `demand.review_signals` with a count, a short quote and the fix to consider (kiosk, KDS, tableside ordering, AI phone answering, online ordering, loyalty, statement review). Up to 3, strongest first. The rules and the full map are in `references/review-signals.md`. It's the most persuasive part of the report because it comes from the restaurant's own guests, so never stretch it: one review is not a pattern, and food or service complaints get no product attached.
 
 ### 4. Write `data.json`, in two passes
 
@@ -173,4 +175,5 @@ Keep `evidence.md` next to the PDF.
 | `references/evidence-template.md` | Template for the evidence log |
 | `examples/sample-falafel/` | A complete fictional example (data, PDF) |
 | `references/chat-mode.md` | How to make the report in a chat AI without the scripts |
+| `references/review-signals.md` | Review complaints → the fix to consider: evidence rules and the map |
 | `templates/chat-report.html`, `templates/chat-report.md` | Report templates for chat mode, with the fixed Truvana Tech lines |

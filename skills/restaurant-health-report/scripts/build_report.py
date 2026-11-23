@@ -49,6 +49,19 @@ SOLUTIONS = {
     "reputation": "loyalty points, gift cards and texts that bring guests back (the listing fixes are free).",
     "delivery": "online ordering on the restaurant's own website and app, with no commission per order.",
     "phone": "AI phone answering in English and Spanish, so no order is missed.",
+    "kds": "a kitchen display (KDS) that shows every order on one screen, in English or Spanish.",
+    "tableside": "handhelds and QR codes, so guests order and pay at the table.",
+}
+# Fixes for what reviews keep complaining about (references/review-signals.md): what Truvana Tech offers,
+# each with its page on truvanatech.com. Template text: a report picks the key, never the words.
+FIXES = {
+    "kiosk": ("Self-order kiosk", "guests order and pay on a bilingual kiosk, and the order goes straight to the kitchen.", "/self-order-kiosk"),
+    "kds": ("Kitchen display (KDS)", "every order on one kitchen screen, in English or Spanish, in the order it came in.", "/kitchen-display-system"),
+    "tableside": ("Tableside ordering", "handhelds and QR codes, so guests order and pay at the table.", "/tableside-ordering"),
+    "phone": ("AI phone answering", "phone orders answered in English and Spanish, so no call is missed.", "/ai-phone-ordering"),
+    "online": ("Online ordering", "orders from the restaurant's own page and app, with no commission.", "/online-ordering"),
+    "loyalty": ("Loyalty and gift cards", "points, gift cards and texts that bring guests back.", "/restaurant-loyalty-program"),
+    "payments": ("Statement review", "a free statement review, every fee explained and a written quote.", "/contact"),
 }
 SIGNALS = {"strong": ("Strong signal", "sig-strong"), "some": ("Some signal", "sig-some"),
            "low": ("Low signal", "sig-low"), "unknown": ("Not enough data", "sig-unknown")}
@@ -324,7 +337,9 @@ def sec_demand(d):
         rows.append(f'<div class="row"><span><b style="color:var(--navy)">{esc(r["site"])}</b> · {esc(r["rating"])}★</span>'
                     f'<div class="track"><div class="fill{o}" style="width:{w:.1f}%"></div></div><span class="val{o}">{esc(shown)}</span></div>')
     body = f'<div class="card bars" style="margin-bottom:12pt">{"".join(rows)}</div>'
-    chips = "".join(f'<span class="chip{" neg" if t.get("negative") else ""}">{esc(t["text"])}</span>' for t in d.get("themes", []))
+    # With review signals, the complaints are in that table: the chips keep the praise.
+    themes = [t for t in d.get("themes", []) if not (d.get("review_signals") and t.get("negative"))]
+    chips = "".join(f'<span class="chip{" neg" if t.get("negative") else ""}">{esc(t["text"])}</span>' for t in themes)
     if chips:
         body += f'<div class="lbl" style="margin-bottom:6pt">What guests keep mentioning</div><div class="chips" style="margin-bottom:14pt">{chips}</div>'
     comp = d.get("competitors") or []
@@ -365,10 +380,38 @@ def sec_demand(d):
         cols = " 12pt ".join(["1fr"] * len(j[:4]))
         body += (f'<div class="lbl" style="margin-bottom:6pt">The public guest journey today</div>'
                  f'<div class="flow" style="margin-bottom:14pt;grid-template-columns:{cols}">{"".join(parts)}</div>')
-    body += f'<div class="grid2" style="margin-bottom:12pt">{card("Clearly working", need(d, "working", "demand"), "green")}{card("Not visible publicly", need(d, "not_visible", "demand"), "orange")}</div>'
+    signals = review_signals(d)
+    if signals:
+        body += signals
+    else:
+        body += f'<div class="grid2" style="margin-bottom:12pt">{card("Clearly working", need(d, "working", "demand"), "green")}{card("Not visible publicly", need(d, "not_visible", "demand"), "orange")}</div>'
     body += callout("Bottom line", need(d, "bottom_line", "demand"))
     total = sum(r["count"] for r in ratings)
-    return body, {"ratings_total": total, "sites": len(ratings), "nearby": comp_out}
+    return body, {"ratings_total": total, "sites": len(ratings), "nearby": comp_out,
+                  "review_signals": [{"theme": x["theme"], "reviews": x["count"], "fix": x["fix"]} for x in d.get("review_signals", [])[:3]]}
+
+
+def review_signals(d):
+    """What reviews keep complaining about, and the fix to consider (references/review-signals.md). Up to 3,
+    each from at least 2 separate reviews (1 is enough when the owner says the same)."""
+    items = d.get("review_signals") or []
+    if not items:
+        return ""
+    if len(items) > 3:
+        raise SystemExit("data.json: demand.review_signals takes at most 3 (the strongest)")
+    rows = ""
+    for x in items:
+        if x.get("fix") not in FIXES:
+            raise SystemExit(f"data.json: review_signals fix '{x.get('fix')}' is not one of {sorted(FIXES)}")
+        n = int(x.get("count", 0))
+        if n < 2 and not (n >= 1 and x.get("owner_agrees")):
+            raise SystemExit(f"data.json: review signal '{x.get('theme')}' needs 2+ reviews (or 1 and owner_agrees)")
+        label, _line, path = FIXES[x["fix"]]
+        rows += (f'<tr><td><b style="color:var(--navy)">{esc(x["theme"])}</b><br><span class="small">"{esc(x["quote"])}" ({esc(x["source"])})</span></td>'
+                 f'<td class="r" style="white-space:nowrap">{n} review{"s" if n != 1 else ""}{" + owner" if x.get("owner_agrees") else ""}</td>'
+                 f'<td style="width:30%"><b style="color:var(--orange)">{esc(label)}</b><br><span class="small">{link(path, "truvanatech.com" + path)}</span></td></tr>')
+    return (f'<div class="lbl" style="margin-bottom:6pt">What reviews point to · a fix to consider for each</div>'
+            f'<table class="comp" style="margin-bottom:12pt"><tr><th>What guests say</th><th class="r">How often</th><th>Fix to consider</th></tr>{rows}</table>')
 
 
 def sec_card_fees(d):
