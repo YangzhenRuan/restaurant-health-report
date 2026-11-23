@@ -1,0 +1,14 @@
+{
+  "name": "truvana-tech",
+  "description": "Free tools for restaurant owners from Truvana Tech (truvanatech.com).",
+  "owner": { "name": "Truvana Tech", "url": "https://truvanatech.com" },
+  "plugins": [
+    {
+      "name": "restaurant-health-report",
+      "source": "./",
+      "description": "A 7-page restaurant health report from public sources: ratings, card-fee costs, delivery-app vs. direct pricing, free listing fixes and a short plan.",
+      "category": "business",
+      "tags": ["restaurant", "small-business", "credit-card-processing", "food-delivery", "local-seo", "report"]
+    }
+  ]
+}

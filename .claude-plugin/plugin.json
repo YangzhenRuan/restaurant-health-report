@@ -1,0 +1,11 @@
+{
+  "name": "restaurant-health-report",
+  "displayName": "Restaurant Health Report",
+  "version": "1.0.0",
+  "description": "Helps any restaurant see where it stands: a 7-page report from public sources covering ratings, card-fee costs, delivery-app vs. direct pricing, free listing fixes and a short plan. By Truvana Tech.",
+  "author": { "name": "Truvana Tech", "url": "https://truvanatech.com" },
+  "homepage": "https://truvanatech.com",
+  "repository": "https://github.com/YangzhenRuan/restaurant-health-report",
+  "license": "MIT",
+  "keywords": ["restaurant", "restaurant-audit", "health-report", "credit-card-fees", "delivery-apps", "doordash", "uber-eats", "local-seo", "small-business"]
+}

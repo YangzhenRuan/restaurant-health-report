@@ -16,29 +16,27 @@ Works with **Claude Code** and **OpenAI Codex**. Free and open source.
 
 ## Install
 
-Pick one.
+**Claude Code**: paste this into Claude Code:
 
-**A. Paste this into Claude Code or Codex**
+```
+/plugin install restaurant-health-report --marketplace YangzhenRuan/restaurant-health-report
+```
+
+**Codex, Cursor and other agents**: run this in Terminal (uses [skills.sh](https://skills.sh)):
+
+```bash
+npx skills add YangzhenRuan/restaurant-health-report
+```
+
+**No Node.js?** Paste this sentence into Claude Code or Codex instead:
 
 ```
 Install the restaurant-health-report skill from https://github.com/YangzhenRuan/restaurant-health-report (copy its skills/restaurant-health-report folder into my skills folder), then build the sample report from its examples folder to check that it works.
 ```
 
-**B. Paste one line into Terminal**
-
-Mac or Linux:
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/YangzhenRuan/restaurant-health-report/main/install.sh | bash
-```
-
-Windows (PowerShell):
-
-```powershell
-irm https://raw.githubusercontent.com/YangzhenRuan/restaurant-health-report/main/install.ps1 | iex
-```
-
-Either way the skill is installed for both Claude Code (`~/.claude/skills/`) and Codex (`~/.codex/skills/`). To update later, run the same line again.
+Or run the installer script, which installs for both Claude Code and Codex:
+`curl -fsSL https://raw.githubusercontent.com/YangzhenRuan/restaurant-health-report/main/install.sh | bash` on Mac or Linux, or
+`irm https://raw.githubusercontent.com/YangzhenRuan/restaurant-health-report/main/install.ps1 | iex` in Windows PowerShell.
 
 **You also need:**
 - [Python 3](https://www.python.org/downloads/): already on most Macs.
