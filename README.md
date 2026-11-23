@@ -21,6 +21,8 @@ Works with **Claude Code** and **OpenAI Codex**. Free and open source.
 
 *Pages from the [sample report](skills/restaurant-health-report/examples/sample-falafel/sample-report.pdf). The restaurant in it is fictional.*
 
+**[See the full guide for owners and ISOs on truvanatech.com →](https://truvanatech.com/tools/restaurant-health-report?utm_source=github&utm_medium=readme&utm_campaign=restaurant-health-report)**
+
 ---
 
 ## Install
