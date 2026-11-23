@@ -1,6 +1,6 @@
 ---
 name: restaurant-health-report
-description: Build a "Restaurant Health Report", a 7-page PDF that helps any restaurant quickly understand where it stands, using public sources only. It covers ratings and reviews, card-fee costs at the restaurant's real ticket sizes, delivery-app vs. direct pricing, free listing fixes and a short action plan. Use when someone asks for a restaurant health report, a restaurant audit or check-up, or wants to understand a restaurant's online presence, fees or delivery economics. Made by Truvana Tech (truvanatech.com).
+description: Build a "Restaurant Health Report", a 7-page PDF check-up that helps any restaurant quickly understand where it stands, using public sources only. It covers ratings and reviews compared with nearby restaurants, card-fee costs at the restaurant's real ticket sizes, delivery-app vs. direct pricing, free listing fixes, and where to start (switch processors, add a kiosk, get reputation help, or cut delivery costs). Use when someone asks for a restaurant health report, a restaurant audit or check-up, or wants to understand a restaurant's online presence, fees or delivery economics. Made by Truvana Tech (truvanatech.com).
 ---
 
 # Restaurant Health Report
@@ -13,7 +13,9 @@ Someone gives you a restaurant: its name plus a website, address or ordering lin
 
 The person asking may be the owner, a manager, or someone helping them.
 
-The checklist and the report format come from Truvana Tech's 10 years of working with restaurants. Every report carries a small "made with Truvana Tech" footer and links to Truvana's free tools. Those are part of the template; don't add, remove or reword them.
+**Why this exists.** Truvana Tech reached out to more than 6,000 merchants and tested many payment solutions. Most owners it talked to watched only their card rate. Few were getting the most from their marketing or knew whether their reviews were good or bad next to nearby restaurants, and few knew where to start improving. This skill turns Truvana's analysis into a quick check-up that answers one question: **where should this restaurant start?** Should it switch card processors or pricing? Add a self-order kiosk to save labor? Get help with reviews and reputation? Or cut delivery-app costs?
+
+**It's a check-up, not a full service.** Say what the public evidence shows and stop there. Every report ends with an offer from Truvana Tech's team to meet and go deeper. That offer, the footer and the free-tool links are part of the template; don't add, remove or reword them.
 
 Example output: `examples/sample-falafel/sample-report.pdf`. Its input is `examples/sample-falafel/data.json`. Read both before your first report. The sample restaurant is **fictional**; real reports never contain invented facts.
 
@@ -54,9 +56,11 @@ Use a real browser tool if you have one (Claude in Chrome, the Codex browser and
 
 Record everything in `evidence.md` as you go: the URL, what you saw, and the date.
 
-### 3. Find the main finding
+### 3. Find the main finding and where to start
 
-Before writing, decide the one-sentence bottom line. Look at what the data actually says:
+Before writing, decide two things.
+
+**The one-sentence bottom line.** Look at what the data actually says:
 
 - **Small tickets ($3–$12 items).** The fixed per-sale card fee is most of the cost, so the card-fee page matters most. This is the sample report's story.
 - **Mid or large tickets ($14+).** The percentage is most of the fee, so the rate, the monthly fees and the contract matter more than the cents. The script switches the card-fee box and the savings table automatically when the fixed share is under 50%.
@@ -65,6 +69,17 @@ Before writing, decide the one-sentence bottom line. Look at what the data actua
 - **Wrong phone, hours or name across listings.** The free fixes come first, since they're the easiest wins.
 - **Weak or uneven ratings.** Report the recurring themes honestly. Suggest operational fixes only where the reviews point to them.
 - **Franchise or multi-unit store.** Note which systems the brand seems to mandate and which look like the operator's choice. If one location runs a different POS or ordering system from its sister stores, note it: the location is probably run separately.
+
+**Where to start.** Answer the four questions on the last page (`plan.where_to_start`), each with a signal that matches the evidence:
+
+| Question | A strong signal looks like | Don't claim |
+|---|---|---|
+| Switch card processor or pricing? | small tickets (fixed share ≥ 50%), a surcharge or cash discount that's missing or confusing, no visible card-fee policy | the current rate, unless you have the statement |
+| Add a self-order kiosk to save labor? | reviews about lines, waits or wrong orders; a busy counter-service menu; staff shortages mentioned in reviews | labor costs or order counts (not public) |
+| Get help with reviews and reputation? | rating below the nearby average, far fewer reviews than nearby rivals, recurring complaints, listing mistakes | that reviews are fake, or that replying will raise the rating by a set amount |
+| Cut delivery-app costs? | app prices close to direct prices, high-priced items with no markup, no direct ordering | the commission plan, unless it's public |
+
+Use `strong`, `some`, `low` or `unknown` (not enough data). `unknown` is a good answer; it tells the owner what to measure. The plan page's title should name the order to start in, for example "Where to start: payments first, then delivery."
 
 Pick a cover headline that is short, true and specific. For example: "The demand is proven. The margin is in the small print."
 
@@ -96,6 +111,8 @@ Run every item in `references/qa-checklist.md`. The ones that matter most:
 - No fact rests only on a search snippet.
 - The statuses are honest.
 - No page overflows.
+- Nearby competitors are the same kind of restaurant, really nearby, and their numbers come from their own listing pages.
+- Every "where to start" signal cites evidence in the report.
 - The restaurant's name and address are spelled exactly as on its own site. If the site's location name differs from the postal city (for example a neighborhood name), use the site's name in `area_label` and the postal address in `address`.
 
 ### 7. Deliver

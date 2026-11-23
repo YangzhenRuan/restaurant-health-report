@@ -37,9 +37,12 @@ FREE_TOOLS = {
 CTA_FEES = ("Free statement review",
             "Truvana Tech will read one month of your card statement with you, line by line, and show your real rate in writing. Free, in English or Spanish.",
             "/contact")
-CTA_PLAN_TITLE = "Want a second look?"
-CTA_PLAN_TEXT = ("This report was made with a free tool from Truvana Tech, built on 10 years of helping restaurants "
-                 "with card processing, POS and online ordering. Send one card statement for a free review.")
+CTA_PLAN_TITLE = "Want a deeper look?"
+CTA_PLAN_TEXT = ("This report is a quick check-up from public information, not a full analysis. Truvana Tech built it "
+                 "from conversations with 6,000+ merchants. For a deeper look, our team is happy to meet with you, "
+                 "walk through your restaurant together and suggest what to improve first.")
+SIGNALS = {"strong": ("Strong signal", "sig-strong"), "some": ("Some signal", "sig-some"),
+           "low": ("Low signal", "sig-low"), "unknown": ("Not enough data", "sig-unknown")}
 
 
 def link(path, text=None, cls=""):
@@ -179,6 +182,23 @@ ol.qs li:before{content:counter(q);font-weight:700;color:var(--orange)}
 .fix p{margin:0;font-size:8.3pt}
 .fix .ev{margin-top:4pt;font-size:7.6pt;color:var(--meta)}
 .small{font-size:7.2pt;color:var(--meta);margin:6pt 0 0}
+table.comp{width:100%;border-collapse:collapse;font-size:8.2pt;background:var(--paper);border:.7pt solid var(--line);border-radius:6pt}
+table.comp th{font-size:6.4pt;letter-spacing:.14em;text-transform:uppercase;color:var(--meta);text-align:left;padding:6pt 9pt;border-bottom:.6pt solid var(--line);font-weight:700}
+table.comp td{padding:3.4pt 9pt;border-bottom:.6pt solid var(--line);font-variant-numeric:tabular-nums}
+table.comp tr:last-child td{border-bottom:0}
+table.comp tr.me td{background:#EEF2FC;color:var(--navy);font-weight:700}
+table.comp .r{text-align:right}
+table.comp .bar{height:6pt;background:var(--navy);border-radius:3pt}
+table.comp tr:not(.me) .bar{background:#B9C2DA}
+.where{display:grid;grid-template-columns:1fr 1fr;gap:9pt;margin-bottom:10pt}
+.where .card{padding:10pt 12pt}
+.where h3{margin:0 0 4pt;font-size:9.6pt;color:var(--navy)}
+.where p{font-size:7.9pt;margin:0 0 3pt}
+.where .nx{font-size:7.6pt;color:var(--meta)}
+.where .nx a{color:var(--orange);font-weight:600}
+.sig{display:inline-block;font-size:6.2pt;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:2pt 5pt;border-radius:3pt;margin-bottom:5pt}
+.sig-strong{background:var(--orange-soft);color:var(--orange)}.sig-some{background:var(--amber-soft);color:var(--amber)}
+.sig-low{background:var(--green-soft);color:var(--green)}.sig-unknown{background:#E9E6F1;color:#4A3F7A}
 a{color:inherit;text-decoration:none}
 .page>.ftr a{color:var(--navy);font-weight:600}
 .callout a.cta{display:inline-block;margin-top:5pt;color:#fff;font-weight:700;text-decoration:underline;text-underline-offset:2pt}
@@ -298,7 +318,34 @@ def sec_demand(d):
     chips = "".join(f'<span class="chip{" neg" if t.get("negative") else ""}">{esc(t["text"])}</span>' for t in d.get("themes", []))
     if chips:
         body += f'<div class="lbl" style="margin-bottom:6pt">What guests keep mentioning</div><div class="chips" style="margin-bottom:14pt">{chips}</div>'
-    j = d.get("journey", [])
+    comp = d.get("competitors") or []
+    comp_out = {}
+    if comp:
+        own = d.get("own") or next((r for r in ratings if r["site"].lower().startswith("google")), None)
+        if not own:
+            raise SystemExit("data.json: demand.competitors needs a Google entry in demand.ratings (or demand.own)")
+        me_name = d.get("own_name") or "This restaurant"
+        rows_c = [(me_name, float(own["rating"]), int(own["count"]), True)] + [(c["name"], float(c["rating"]), int(c["count"]), False) for c in comp]
+        n = len(rows_c)
+        by_rating = sorted(rows_c, key=lambda r: (-r[1], -r[2]))
+        by_count = sorted(rows_c, key=lambda r: -r[2])
+        r_rank = [r[3] for r in by_rating].index(True) + 1
+        c_rank = [r[3] for r in by_count].index(True) + 1
+        avg = sum(c[1] for c in rows_c if not c[3]) / len(comp)
+        mx_c = max(r[2] for r in rows_c) or 1
+        ordinal = lambda k: f"{k}{'th' if 10 <= k % 100 <= 20 else {1: 'st', 2: 'nd', 3: 'rd'}.get(k % 10, 'th')}"
+        trs = "".join(
+            f'<tr class="{"me" if me else ""}"><td>{esc(name)}</td><td class="r">{rt:.1f}★</td><td class="r">{cnt:,}</td>'
+            f'<td style="width:34%"><div class="bar" style="width:{max(3, 100 * cnt / mx_c):.0f}%"></div></td></tr>'
+            for name, rt, cnt, me in by_rating)
+        area = d.get("competitor_area", "Nearby restaurants of the same kind, Google Maps")
+        summary = f"Rating: {ordinal(r_rank)} of {n} · Reviews: {ordinal(c_rank)} of {n} · Nearby average {avg:.1f}★"
+        body += (f'<div class="lbl" style="margin-bottom:6pt">Compared with nearby restaurants · {esc(area)}</div>'
+                 f'<table class="comp" style="margin-bottom:5pt"><tr><th>Restaurant</th><th class="r">Google</th><th class="r">Reviews</th><th>Review volume</th></tr>{trs}</table>'
+                 f'<p class="small" style="margin:0 0 12pt;color:var(--navy);font-weight:600">{esc(summary)}</p>')
+        comp_out = {"rating_rank": f"{ordinal(r_rank)} of {n}", "review_rank": f"{ordinal(c_rank)} of {n}",
+                    "nearby_average_rating": f"{avg:.1f}", "rating_gap_vs_average": f"{float(own['rating']) - avg:+.1f}", "summary": summary}
+    j = [] if comp else d.get("journey", [])
     if j:
         parts = []
         for n, s in enumerate(j[:4]):
@@ -312,7 +359,7 @@ def sec_demand(d):
     body += f'<div class="grid2" style="margin-bottom:12pt">{card("Clearly working", need(d, "working", "demand"), "green")}{card("Not visible publicly", need(d, "not_visible", "demand"), "orange")}</div>'
     body += callout("Bottom line", need(d, "bottom_line", "demand"))
     total = sum(r["count"] for r in ratings)
-    return body, {"ratings_total": total, "sites": len(ratings)}
+    return body, {"ratings_total": total, "sites": len(ratings), "nearby": comp_out}
 
 
 def sec_card_fees(d):
@@ -472,17 +519,19 @@ def tool_link(step):
 
 
 def sec_plan(d):
-    steps = need(d, "steps", "plan")
-    body = "".join(
-        f'<div class="step"><div class="n">{n}</div><div><h3>{md(s["title"])}</h3><p>{md(s["text"])}</p>'
-        f'<div class="measure"><b>Measure:</b> {md(s["measure"])}{tool_link(s)}</div></div></div>'
-        for n, s in enumerate(steps, 1))
+    where = need(d, "where_to_start", "plan")
+    cards_html = ""
+    for w in where[:4]:
+        label, cls = SIGNALS.get(w.get("signal", "unknown"), SIGNALS["unknown"])
+        cards_html += (f'<div class="card"><span class="sig {cls}">{label}</span><h3>{md(w["question"])}</h3>'
+                       f'<p>{md(w["why"])}</p><p class="nx"><b>First step:</b> {md(w["next"])}{tool_link(w)}</p></div>')
+    body = f'<div class="where">{cards_html}</div>'
     qs = "".join(f"<li>{md(q)}</li>" for q in need(d, "questions", "plan"))
     body += (f'<div class="grid2" style="grid-template-columns:1.15fr 1fr;margin-top:4pt">'
              f'<div class="card"><h4 class="n" style="margin-bottom:7pt">Questions to answer with your own numbers</h4><ol class="qs">{qs}</ol></div>'
              f'<div class="card cta-box" style="background:var(--navy);border:0;color:#fff"><h4 style="color:#F3A57A;margin-bottom:7pt">{esc(CTA_PLAN_TITLE)}</h4>'
              f'<p style="font-size:10pt;font-weight:500;line-height:1.45;color:#fff">{esc(CTA_PLAN_TEXT)}</p>'
-             f'<p style="font-size:10pt;margin-top:9pt">{link("/contact", "Get a free statement review →")}</p>'
+             f'<p style="font-size:10pt;margin-top:9pt">{link("/contact", "Book a free meeting →")}</p>'
              f'<p style="font-size:7.6pt;color:#C6D0EF;margin-top:6pt">{link("/tools", "More free tools at truvanatech.com/tools")}</p></div></div>')
     basis = d.get("research_basis", [])
     if basis:
@@ -499,7 +548,7 @@ SECTIONS = [
     ("card_fees", "Card fees", "Card fee economics", sec_card_fees),
     ("delivery", "Delivery economics", "Matched public pricing", sec_delivery),
     ("fixes", "Quick fixes", "Found in public listings", sec_fixes),
-    ("plan", "Plan", "Recommendation", sec_plan),
+    ("plan", "Where to start", "Where to start", sec_plan),
 ]
 
 

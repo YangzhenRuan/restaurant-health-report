@@ -109,8 +109,8 @@
     "first_question": "\"Which systems does the franchise agreement require, and which are the owner's own choice? Card processing in particular.\""
   },
   "demand": {
-    "title": "The food is not the problem. Every site rates it 4.6 or higher.",
-    "dek": "Ratings as shown on each public page. The bar length shows the number of ratings, so you can see where guests actually leave feedback.",
+    "title": "Guests rate it above every nearby competitor.",
+    "dek": "Ratings on each public page, then Google ratings for nearby restaurants of the same kind (invented names in this sample).",
     "ratings": [
       {
         "site": "Google",
@@ -160,9 +160,6 @@
         "text": "Fast service"
       },
       {
-        "text": "Chicken rice bowl white sauce"
-      },
-      {
         "text": "Very small space, hard to get a table",
         "negative": true
       },
@@ -194,10 +191,34 @@
         "weak": true
       }
     ],
-    "working": "A famous $4 sandwich, high ratings on every site, quick counter service, a direct ordering link on the official page, and delivery on all three major apps.",
-    "not_visible": "What share of orders come through delivery apps, the card fees per sale, whether Olive & Za'atar owns its guest list, and whether delivery is turned off on purpose for direct orders.",
+    "working": "A famous $4 sandwich, top ratings among nearby spots, quick counter service, and delivery on all three major apps.",
+    "not_visible": "What share of orders come through the apps, the card fees per sale, and whether the owner can see the brand's guest list.",
     "sources": "FICTIONAL SAMPLE: restaurant, names, phone numbers and figures are invented to show the format. Real reports cite every source.",
-    "bottom_line": "Guests already want the food. The opportunity is to keep more of each small ticket the store already sells."
+    "bottom_line": "Guests already want the food. The opportunity is keeping more of each small ticket.",
+    "own_name": "Olive & Za'atar",
+    "competitor_area": "4 counter-service spots within 0.5 mi, Google Maps",
+    "competitors": [
+      {
+        "name": "Nearby Grill A",
+        "rating": 4.5,
+        "count": 1240
+      },
+      {
+        "name": "Nearby Grill B",
+        "rating": 4.3,
+        "count": 860
+      },
+      {
+        "name": "Nearby Grill C",
+        "rating": 4.6,
+        "count": 410
+      },
+      {
+        "name": "Nearby Grill D",
+        "rating": 4.2,
+        "count": 2350
+      }
+    ]
   },
   "card_fees": {
     "title": "On a $4 sandwich, the 15¢ costs more than the 2.6%.",
@@ -362,34 +383,14 @@
     "sources": "FICTIONAL SAMPLE: restaurant, names, phone numbers and figures are invented to show the format. Real reports cite every source."
   },
   "plan": {
-    "title": "Three steps to keep more of every ticket.",
-    "dek": "Each step starts from something the owner controls, so it works inside a franchise too.",
-    "steps": [
-      {
-        "title": "Read one card statement line by line",
-        "text": "Divide total fees by total card sales to get the real rate. Then find the cents per sale, the monthly fees and the contract end date.",
-        "measure": "effective rate, cost per sale, yearly fees.",
-        "tool": "card-fee-calculator"
-      },
-      {
-        "title": "Check delivery margin by app",
-        "text": "Use the real commission plan and order mix to see what each app keeps on a typical order, then reprice sides and the platter and point repeat guests to direct pickup.",
-        "measure": "net per delivery order, share of orders that are direct.",
-        "tool": "delivery-app-commission-calculator"
-      },
-      {
-        "title": "Make sure every call and listing reaches this store",
-        "text": "Fix the phone number and the hours, then decide who answers calls during the lunch rush, when catering and large orders come in.",
-        "measure": "listing accuracy, missed calls, catering orders."
-      }
-    ],
+    "title": "Where to start: payments first, then delivery.",
+    "dek": "Four questions every owner asks, each answered only as far as the public evidence goes.",
     "questions": [
       "Which systems does the franchise require: POS, ordering, loyalty, processing?",
       "Who processes your cards today, and when does that contract end?",
       "Roughly how many card sales a month, at what average ticket?",
       "What share of orders comes from each delivery app, and on which commission plan?",
-      "Can you see and message the guests who earn points at your store?",
-      "Is the early delivery cutoff on purpose? Who answers the 703 number?"
+      "Can you see and message the guests who earn points at your store?"
     ],
     "accessed": "November 23, 2026",
     "research_basis": [
@@ -401,6 +402,34 @@
       "Google Maps, Yelp and Apple Maps listings",
       "Local news coverage of the store",
       "Truvana Tech card-fee rules by state (DC)"
+    ],
+    "where_to_start": [
+      {
+        "question": "Switch card processor or pricing?",
+        "signal": "strong",
+        "why": "Small tickets: at a common 2.6% + 15¢, a $4.00 sale pays 6.35%, and 59% of that fee is the fixed cents.",
+        "next": "read one statement for the real rate and cents per sale.",
+        "tool": "card-fee-calculator"
+      },
+      {
+        "question": "Cut delivery-app costs?",
+        "signal": "some",
+        "why": "Mains carry a flat 49¢ app markup; sides and the $44.99 platter carry none, so the full commission comes out of margin.",
+        "next": "price apps by percentage and point regulars to pickup.",
+        "tool": "delivery-app-commission-calculator"
+      },
+      {
+        "question": "Add a self-order kiosk to save labor?",
+        "signal": "unknown",
+        "why": "Reviews praise fast service and call the shop very small. Order counts and staffing aren't public.",
+        "next": "count peak-hour orders and staff per shift before deciding."
+      },
+      {
+        "question": "Get help with reviews and reputation?",
+        "signal": "low",
+        "why": "4.7★ on 2,097 Google reviews, first of 5 nearby on rating. The weak spot is listings, not reviews.",
+        "next": "fix the phone and hours mismatches (page 6)."
+      }
     ]
   }
 }

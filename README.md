@@ -1,10 +1,19 @@
 # Restaurant Health Report: an AI agent skill
 
-**Any restaurant can quickly see where it stands. Give your AI agent a restaurant's name and get back a 7-page report, built only from public sources.**
+**A quick check-up that shows a restaurant where to start: switch card processors, add a kiosk, get help with reviews, or cut delivery-app costs.**
 
-The report covers what guests say, what card fees and delivery apps really cost at that restaurant's ticket sizes, and the listing mistakes the owner can fix this week for free.
+Give your AI agent a restaurant's name. About 30 minutes later you get a 7-page report, built only from public sources. It covers how the restaurant's reviews compare with nearby restaurants, what card fees and delivery apps really cost at its ticket sizes, and listing mistakes the owner can fix this week for free.
 
-The checklist behind it comes from 10 years of [Truvana Tech](https://truvanatech.com?utm_source=github&utm_medium=readme&utm_campaign=restaurant-health-report) working with restaurants on card processing, POS and online ordering.
+### Why we built it
+
+[Truvana Tech](https://truvanatech.com?utm_source=github&utm_medium=readme&utm_campaign=restaurant-health-report) reached out to more than 6,000 merchants and tested many payment solutions along the way. What we heard again and again:
+- **Owners watch only the card rate.** Almost nobody looks at their effective rate, their delivery margins or their marketing as a whole.
+- **Nobody knows whether their reviews are good or bad compared with the restaurants around them.**
+- **Few know where to start improving.** Is it the processor? Labor at the counter? Reputation?
+
+We knew the analysis that answers those questions, so we wrote it down as an AI skill anyone can run.
+
+**It's a check-up, not a full service.** If you want to go deeper, the Truvana Tech team is happy to meet, walk through your restaurant with you, and suggest what to improve first.
 
 Works with **Claude Code** and **OpenAI Codex**. Free and open source.
 
@@ -54,7 +63,7 @@ Make a restaurant health report for <restaurant name>, <website or street addres
 
 Add anything you know, such as "I'm the owner" or "it's a franchise location". The agent then:
 
-1. **Researches** the restaurant's own site, its online ordering page, Uber Eats, DoorDash, Grubhub, Google Maps, Yelp and Apple Maps.
+1. **Researches** the restaurant's own site, its online ordering page, Uber Eats, DoorDash, Grubhub, Google Maps, Yelp, Apple Maps and nearby competitors.
 2. **Logs evidence**: every fact goes into `evidence.md`, with the link it came from.
 3. **Builds the PDF**: a script does all the arithmetic and the layout.
 4. **Checks its own work**: layout overflow, hand-typed numbers, and a quality checklist.
@@ -68,11 +77,11 @@ A report takes about 30–45 minutes of agent time. If the agent has a browser (
 |---|---|
 | 1. Cover | The headline finding and four key numbers |
 | 2. Snapshot | Hours, ordering, loyalty, POS and card rules, each tagged Verified / Verify / Not confirmed / Not public |
-| 3. Demand | Ratings by site, recurring review themes, the guest journey |
+| 3. Demand | Ratings by site, recurring review themes, and how you rank against nearby restaurants |
 | 4. Card fees | The effective card rate at the restaurant's real ticket sizes, and what a small improvement is worth |
 | 5. Delivery | The same items priced direct vs. on the apps, and what each commission tier keeps |
 | 6. Free fixes | Wrong phone numbers, mismatched hours, broken links, unpriced items |
-| 7. Plan | Three next steps, questions to answer with your own numbers, research sources |
+| 7. Where to start | Switch processors? Add a kiosk? Reputation help? Cut delivery costs? Each one rated by the evidence, with a first step |
 
 ## Rules the skill never breaks
 
@@ -114,7 +123,7 @@ Every report links to these free tools, which help with the follow-up questions:
 
 [Truvana Tech](https://truvanatech.com?utm_source=github&utm_medium=readme&utm_campaign=restaurant-health-report) is a local team in DC, Maryland and Northern Virginia. It installs POS systems and card machines for restaurants and small businesses, and supports owners in English or Spanish.
 
-Every report made with this skill ends with a link to a free card statement review.
+Every report made with this skill ends with an offer to meet with the Truvana Tech team for a deeper look. That part is optional and free.
 
 ## License
 

@@ -54,7 +54,12 @@ The budgets below keep every page on one sheet. They are approximate; `render_pd
   - `count_text` is the displayed form, for example "260+".
   - `channel: "delivery"` colours the bar orange.
 - `themes`: 5–9 items of `{text, negative?}`, each ≤ 40 characters.
-- `journey`: 4 stages of `{stage, title, note, weak?}`.
+- `competitors`: 3–5 items of `{name, rating, count}`, Google numbers for nearby restaurants of the same kind (see the playbook).
+  - `own_name` names the restaurant's row.
+  - `competitor_area` explains how they were chosen, ≤ 70 characters.
+  - The script ranks the restaurant against them and prints `nearby` (rating rank, review rank, nearby average, gap). Use those values in titles and the cover.
+  - When `competitors` is set, it replaces the journey row below.
+- `journey`: 4 stages of `{stage, title, note, weak?}`. Only shown when there are no competitors.
   - `title` ≤ 16 characters; `note` ≤ 32 characters.
   - `weak: true` gives the stage a dashed border, for the weak link.
 - `working`, `not_visible`: ≤ 230 characters each.
@@ -104,11 +109,12 @@ The budgets below keep every page on one sheet. They are approximate; `render_pd
 
 ## `plan` (section 06)
 
-- `steps`: 3 items of `{title, text, measure, tool?}`.
-  - `text` ≤ 220 characters.
-  - `measure` ≤ 120 characters.
-  - `tool`: optional; adds a link to a matching free tool. One of `card-fee-calculator`, `delivery-app-commission-calculator`, `credit-card-surcharge-checker`, `processor-contract-exit-cost` or `cash-discount-sign-maker`.
-- `questions`: 5–6 items, ≤ 95 characters each.
+- `where_to_start`: 4 items of `{question, signal, why, next, tool?}`.
+  - Use the four questions in SKILL.md step 3, in that order unless the evidence says otherwise.
+  - `signal` is one of `strong`, `some`, `low` or `unknown`.
+  - `why` is the evidence, ≤ 150 characters. `next` is the first step, ≤ 80 characters, written lower-case after "First step:".
+  - `tool` optionally adds a free-tool link: `card-fee-calculator`, `delivery-app-commission-calculator`, `credit-card-surcharge-checker`, `processor-contract-exit-cost` or `cash-discount-sign-maker`.
+- `questions`: 4–5 items, ≤ 95 characters each.
 - `accessed`: the date the research was done.
-- The "Want a second look?" box with links to truvanatech.com comes from the template.
+- The "Want a deeper look?" box (a quick check-up, not a full analysis; book a free meeting) comes from the template.
 - `research_basis`: 6–8 short source names, ≤ 60 characters each.

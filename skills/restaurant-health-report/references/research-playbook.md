@@ -82,12 +82,22 @@ Plan about 30–60 minutes of agent time per report. Work through the sources be
 - Apple Maps place pages (`maps.apple.com/place?...`) open in a normal browser and often hold stale phone numbers. Find one by searching `site:maps.apple.com "<name>" "<street>"`. If no result comes up or the page won't open, list Apple Maps under "Could not open" and move on.
 - Don't quote more than a few words of any review. Summarize the themes instead.
 
-## 5. Context (optional, only if quick)
+## 5. Nearby competitors (Google Maps)
+
+Pick **3–5 restaurants of the same kind, close by**: the same cuisine or format (counter service vs. sit-down), at a similar price level, within about 0.5 mi in a dense area or 2 mi in the suburbs.
+
+1. Search Google Maps for `<cuisine> near <the restaurant's address>`, with `hl=en`.
+2. Open each candidate's own listing and record its name, Google rating, review count and distance.
+3. Skip chains of a very different scale, places that are permanently closed, and businesses of a different kind (for example a bakery next to a burger shop).
+4. Put them in `demand.competitors` and describe how you chose them in `demand.competitor_area`, for example "4 counter-service falafel and shawarma spots within 0.5 mi". The script ranks the restaurant against them and works out the nearby average.
+5. Note recurring themes in their reviews only if they help the owner. For example, if nearby rivals get praised for fast online ordering, that's useful.
+
+## 6. Context (optional, only if quick)
 
 - Local news on the store's history or size (Hoodline, Washington City Paper, Eater DC, the Washingtonian). Open the article itself, not just the snippet.
 - The franchise brand's site, for the number of locations and franchise structure.
 
-## 6. Rules and Truvana facts
+## 7. Rules
 
 - State card-surcharge and cash rules: `references/state-rules.md`. If the store is outside DC, MD or VA, look up that state's rule and cite its source.
 

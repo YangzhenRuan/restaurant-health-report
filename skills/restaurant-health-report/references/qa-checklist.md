@@ -12,6 +12,8 @@ Run every item. Fix anything that fails, rebuild and rerender.
 - [ ] Each page's `sources` line names the pages behind its numbers.
 
 ## Numbers
+- [ ] Nearby competitors are the same kind of restaurant, really nearby, and each was opened on Google Maps.
+- [ ] Every "where to start" signal matches evidence shown in the report. `unknown` is used where the evidence is missing.
 - [ ] Cover KPIs and headlines use the exact values `build_report.py` printed. Don't round differently, and don't paraphrase a computed value into a different one ("about a sixth").
 - [ ] Example rates and transaction volumes are labelled as examples or illustrative.
 - [ ] No price, rate or savings figure for any company (vendor, app, processor, Truvana Tech) is invented.
