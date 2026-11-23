@@ -1,0 +1,406 @@
+{
+  "meta": {
+    "restaurant": "Olive & Za'atar",
+    "short_name": "Olive & Za'atar",
+    "subtitle": "franchise location · fictional sample",
+    "area_label": "Georgetown · Washington, DC · fictional",
+    "address": "123 Sample St NW, Washington, DC 20007",
+    "prepared": "November 23, 2026",
+    "sample": true
+  },
+  "cover": {
+    "title": "The demand is proven.\nThe margin is in the small print.",
+    "summary": "Guests already love this shop: **4.7 stars on more than 2,000 Google reviews** and 3,500+ public ratings across five sites. The menu runs on small tickets, with a **$4.00 falafel sandwich** and $3 to $5 sides. At those prices, the fixed cents on every card sale and the commission on every delivery order take a bigger share than they would at a $20 sit-down restaurant. This report shows where that happens, using only public information, and lists what to check on Olive & Za'atar's own statements.",
+    "kpis": [
+      {
+        "label": "Google rating",
+        "value": "4.7★",
+        "note": "2,097 reviews; 4.6 to 4.8 on Yelp, Uber Eats, DoorDash and Grubhub"
+      },
+      {
+        "label": "Hero item",
+        "value": "$4.00",
+        "note": "Falafel sandwich, the most-mentioned dish in reviews"
+      },
+      {
+        "label": "Fee on a $4 tap",
+        "value": "6.4%",
+        "note": "At a common 2.6% + 15¢ rate, the 15¢ is most of it",
+        "accent": true
+      },
+      {
+        "label": "Delivery markup",
+        "value": "+$0.49",
+        "note": "Flat on mains, $0 on sides and the $44.99 platter",
+        "accent": true
+      }
+    ]
+  },
+  "snapshot": {
+    "title": "What a guest sees today, from search to pickup bag.",
+    "dek": "A read of the restaurant's own pages, the brand ordering site, three delivery apps and the main review sites.",
+    "kpis": [
+      {
+        "label": "Public ratings",
+        "value": "3,500+",
+        "note": "Across Google, Yelp, Uber Eats, DoorDash and Grubhub, all 4.6★ or higher"
+      },
+      {
+        "label": "Direct ordering",
+        "value": "Pickup",
+        "note": "Brand ordering site; no delivery option was offered"
+      },
+      {
+        "label": "Delivery apps",
+        "value": "3 live",
+        "note": "Uber Eats, DoorDash and Grubhub, all priced above direct"
+      },
+      {
+        "label": "Spend per person",
+        "value": "$10–20",
+        "note": "Google, from 55 guest reports. A sandwich alone is $4.00"
+      }
+    ],
+    "facts": [
+      {
+        "label": "Operator",
+        "text": "Olive & Za'atar runs this location under a regional falafel brand (a different owner from the other stores in the chain)",
+        "status": "client",
+        "tag": "From owner"
+      },
+      {
+        "label": "Format",
+        "text": "A small original shop: about 800 sq ft, counter service, a few tables. Reviews call it small and fast",
+        "status": "public"
+      },
+      {
+        "label": "Hours",
+        "text": "Sun–Thu 12:00–9:00 pm · Fri–Sat 12:00–10:00 pm (official location page)",
+        "status": "verified"
+      },
+      {
+        "label": "Online ordering",
+        "text": "Brand-wide ordering site with 13 pickup locations; this store takes orders from 12:00 pm",
+        "status": "verified"
+      },
+      {
+        "label": "Loyalty",
+        "text": "\"Earn Points\" sign-in on the brand ordering site. Whether Olive & Za'atar can see or message its own guests is not public",
+        "status": "verify"
+      },
+      {
+        "label": "POS",
+        "text": "Not public. The brand's ordering vendor is built for one POS, so that POS is likely",
+        "status": "not_confirmed"
+      },
+      {
+        "label": "Card processing",
+        "text": "Rate, per-sale fee, monthly fees and contract are not public. One statement answers all of it",
+        "status": "not_public"
+      },
+      {
+        "label": "Cash and card rules",
+        "text": "DC businesses must accept cash (since Jan. 1, 2025). A card surcharge is allowed if it is disclosed before the guest orders",
+        "status": "law",
+        "tag": "DC law"
+      }
+    ],
+    "sources": "FICTIONAL SAMPLE: restaurant, names, phone numbers and figures are invented to show the format. Real reports cite every source.",
+    "first_question": "\"Which systems does the franchise agreement require, and which are the owner's own choice? Card processing in particular.\""
+  },
+  "demand": {
+    "title": "The food is not the problem. Every site rates it 4.6 or higher.",
+    "dek": "Ratings as shown on each public page. The bar length shows the number of ratings, so you can see where guests actually leave feedback.",
+    "ratings": [
+      {
+        "site": "Google",
+        "rating": "4.7",
+        "count": 2097
+      },
+      {
+        "site": "Yelp",
+        "rating": "4.7",
+        "count": 903
+      },
+      {
+        "site": "Uber Eats",
+        "rating": "4.6",
+        "count": 260,
+        "count_text": "260+",
+        "channel": "delivery"
+      },
+      {
+        "site": "DoorDash",
+        "rating": "4.7",
+        "count": 200,
+        "count_text": "200+",
+        "channel": "delivery"
+      },
+      {
+        "site": "Grubhub",
+        "rating": "4.8",
+        "count": 104,
+        "channel": "delivery"
+      }
+    ],
+    "themes": [
+      {
+        "text": "Falafel sandwich"
+      },
+      {
+        "text": "Za'atar fries"
+      },
+      {
+        "text": "Free dipping sauces"
+      },
+      {
+        "text": "Low prices"
+      },
+      {
+        "text": "Fast service"
+      },
+      {
+        "text": "Chicken rice bowl white sauce"
+      },
+      {
+        "text": "Very small space, hard to get a table",
+        "negative": true
+      },
+      {
+        "text": "Occasional quality miss",
+        "negative": true
+      }
+    ],
+    "journey": [
+      {
+        "stage": "Discovery",
+        "title": "Google · Yelp",
+        "note": "Strong ratings, correct phone"
+      },
+      {
+        "stage": "Direct",
+        "title": "Brand site",
+        "note": "Pickup only, opens 12:00"
+      },
+      {
+        "stage": "Delivery",
+        "title": "3 apps",
+        "note": "Higher prices, earlier close"
+      },
+      {
+        "stage": "Repeat",
+        "title": "Brand points",
+        "note": "Operator's access unknown",
+        "weak": true
+      }
+    ],
+    "working": "A famous $4 sandwich, high ratings on every site, quick counter service, a direct ordering link on the official page, and delivery on all three major apps.",
+    "not_visible": "What share of orders come through delivery apps, the card fees per sale, whether Olive & Za'atar owns its guest list, and whether delivery is turned off on purpose for direct orders.",
+    "sources": "FICTIONAL SAMPLE: restaurant, names, phone numbers and figures are invented to show the format. Real reports cite every source.",
+    "bottom_line": "Guests already want the food. The opportunity is to keep more of each small ticket the store already sells."
+  },
+  "card_fees": {
+    "title": "On a $4 sandwich, the 15¢ costs more than the 2.6%.",
+    "dek": "Most card fees are a percentage plus a fixed number of cents per sale. On large tickets the percentage dominates. On a menu built around $4 to $12 items, the fixed cents do, so the effective rate climbs as the ticket shrinks.",
+    "rate": {
+      "percent": 2.6,
+      "fixed": 0.15,
+      "note": "2.6% + 15¢ is a common published flat rate for a tapped or inserted card. It is used here as an example, not as the store's actual rate."
+    },
+    "tickets": [
+      {
+        "label": "$4.00 falafel sandwich",
+        "amount": 4.0
+      },
+      {
+        "label": "$8.00 falafel rice bowl",
+        "amount": 8.0
+      },
+      {
+        "label": "$12.00 bowl + drink",
+        "amount": 12.0
+      },
+      {
+        "label": "$20.00 two-person order",
+        "amount": 20.0
+      },
+      {
+        "label": "$44.99 party platter",
+        "amount": 44.99
+      }
+    ],
+    "rules_title": "DC rules to work within",
+    "rules_text": "DC businesses must take cash (since Jan. 1, 2025). A card surcharge is allowed only if every fee is disclosed clearly before the guest orders. On a $4 item, a visible surcharge reads as a price increase, so lowering the cost is usually the better move than passing it on.",
+    "unknowns_text": "The real rate, the cents per sale, monthly and PCI fees, keyed-in sales, the contract end date and any equipment lease. All of it is on one monthly statement, and the franchise agreement says whether processing is the owner's choice.",
+    "sources": "FICTIONAL SAMPLE: restaurant, names, phone numbers and figures are invented to show the format. Real reports cite every source."
+  },
+  "delivery": {
+    "title": "A flat 49¢ markup can't cover a percentage commission.",
+    "dek": "This store's prices on the brand ordering site vs. Uber Eats and DoorDash (both list the same prices). Taxes, fees and promotions excluded.",
+    "compare_label": "Uber Eats / DoorDash",
+    "items": [
+      {
+        "name": "Falafel Sandwich",
+        "direct": 4.0,
+        "marketplace": 4.49
+      },
+      {
+        "name": "Falafel Bowl",
+        "direct": 7.0,
+        "marketplace": 7.49
+      },
+      {
+        "name": "Falafel Rice Bowl",
+        "direct": 8.0,
+        "marketplace": 8.49
+      },
+      {
+        "name": "Plant Shawarma Sandwich",
+        "direct": 9.0,
+        "marketplace": 9.49
+      },
+      {
+        "name": "Chicken Rice Bowl",
+        "direct": 11.0,
+        "marketplace": 11.49
+      },
+      {
+        "name": "Plant Shawarma Bowl",
+        "direct": 11.0,
+        "marketplace": 11.49
+      },
+      {
+        "name": "Za'atar Fries",
+        "direct": 4.0,
+        "marketplace": 4.0
+      },
+      {
+        "name": "Za'atar Chips & Hummus",
+        "direct": 5.0,
+        "marketplace": 5.0
+      },
+      {
+        "name": "Party Platter (DoorDash)",
+        "direct": 44.99,
+        "marketplace": 44.99
+      }
+    ],
+    "example_order": {
+      "items": [
+        "Chicken Rice Bowl",
+        "Za'atar Fries"
+      ],
+      "note": "15% to 30% is the range of the apps' standard published plans; the store's actual plan is not public."
+    },
+    "tiers": [
+      15,
+      25,
+      30
+    ],
+    "spotlight": {
+      "label": "The platter gap",
+      "price": 44.99,
+      "note": "Commission on one $44.99 Party Platter at 15% to 30%, with no markup to offset it. Catering is where a direct order is worth the most."
+    },
+    "cards": [
+      {
+        "title": "Delivery closes early",
+        "text": "The store is open until 9:00 pm (10:00 pm Fri–Sat). On the day checked, Uber Eats and Grubhub listed delivery until 8:30 pm and DoorDash until 8:10 pm, 30 to 50 minutes before close. That may be on purpose for a small kitchen. Worth asking.",
+        "tone": "orange"
+      },
+      {
+        "title": "Direct is already cheaper",
+        "text": "Every main costs 49¢ less at pickup, and the brand site has points. Nothing in the public journey tells a delivery guest that. \"Same food, lower price, earn points\" is a ready-made message for bag inserts and the counter.",
+        "tone": "green"
+      }
+    ],
+    "sources": "FICTIONAL SAMPLE: restaurant, names, phone numbers and figures are invented to show the format. Real reports cite every source."
+  },
+  "fixes": {
+    "title": "Four fixes that cost nothing and can be done this week.",
+    "dek": "None of these needs new software. They are quick wins the owner can finish this week.",
+    "items": [
+      {
+        "title": "Two phone numbers are live, and Apple Maps has the wrong name",
+        "text": "The restaurant's site, Google and Yelp list **(202) 555-0142**. Grubhub and Apple Maps list **(703) 555-0199**, a Virginia number. Apple Maps also shows an old store name. iPhone and Grubhub guests may call a number that doesn't reach this store.",
+        "fix": "claim the listing in Apple Business Connect (name and phone) and correct the Grubhub store profile. Ask who answers the 703 number today."
+      },
+      {
+        "title": "Delivery ends 30 to 50 minutes before the store closes",
+        "text": "The late-evening window, when office and campus guests order dinner, has no delivery option on any app.",
+        "fix": "check the weekend app hours too (the store is open until 10:00 pm). If the kitchen can handle it, match app hours to store hours."
+      },
+      {
+        "title": "Sides and the party platter carry no delivery markup",
+        "text": "Za'atar fries, chips and hummus, and the $44.99 platter cost the same on the apps as at pickup, so the full commission comes out of margin.",
+        "fix": "review app pricing item by item, using a percentage markup rather than a flat 49¢, within whatever the franchise allows."
+      },
+      {
+        "title": "The cheaper direct price is a secret",
+        "text": "Direct pickup is cheaper and earns points, but no counter sign, bag insert or listing says so.",
+        "fix": "a QR bag insert in every delivery order: \"Order direct next time, pay less, earn points.\""
+      }
+    ],
+    "stats": [
+      {
+        "label": "Listings checked",
+        "value": "8",
+        "note": "Official site, brand ordering, Google, Yelp, Apple Maps and three delivery apps"
+      },
+      {
+        "label": "Inconsistencies",
+        "value": "3",
+        "note": "Phone number, store name and delivery hours",
+        "accent": true
+      },
+      {
+        "label": "Cost to fix",
+        "value": "$0",
+        "note": "Listing edits and a printed insert"
+      }
+    ],
+    "sources": "FICTIONAL SAMPLE: restaurant, names, phone numbers and figures are invented to show the format. Real reports cite every source."
+  },
+  "plan": {
+    "title": "Three steps to keep more of every ticket.",
+    "dek": "Each step starts from something the owner controls, so it works inside a franchise too.",
+    "steps": [
+      {
+        "title": "Read one card statement line by line",
+        "text": "Divide total fees by total card sales to get the real rate. Then find the cents per sale, the monthly fees and the contract end date.",
+        "measure": "effective rate, cost per sale, yearly fees.",
+        "tool": "card-fee-calculator"
+      },
+      {
+        "title": "Check delivery margin by app",
+        "text": "Use the real commission plan and order mix to see what each app keeps on a typical order, then reprice sides and the platter and point repeat guests to direct pickup.",
+        "measure": "net per delivery order, share of orders that are direct.",
+        "tool": "delivery-app-commission-calculator"
+      },
+      {
+        "title": "Make sure every call and listing reaches this store",
+        "text": "Fix the phone number and the hours, then decide who answers calls during the lunch rush, when catering and large orders come in.",
+        "measure": "listing accuracy, missed calls, catering orders."
+      }
+    ],
+    "questions": [
+      "Which systems does the franchise require: POS, ordering, loyalty, processing?",
+      "Who processes your cards today, and when does that contract end?",
+      "Roughly how many card sales a month, at what average ticket?",
+      "What share of orders comes from each delivery app, and on which commission plan?",
+      "Can you see and message the guests who earn points at your store?",
+      "Is the early delivery cutoff on purpose? Who answers the 703 number?"
+    ],
+    "accessed": "November 23, 2026",
+    "research_basis": [
+      "Restaurant's own site (location page, menu)",
+      "Brand ordering site (this location selected)",
+      "Uber Eats store page",
+      "DoorDash store page",
+      "Grubhub store page",
+      "Google Maps, Yelp and Apple Maps listings",
+      "Local news coverage of the store",
+      "Truvana Tech card-fee rules by state (DC)"
+    ]
+  }
+}

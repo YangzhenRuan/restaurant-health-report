@@ -1,0 +1,122 @@
+---
+name: restaurant-health-report
+description: Build a "Restaurant Health Report", a 7-page PDF that helps any restaurant quickly understand where it stands, using public sources only. It covers ratings and reviews, card-fee costs at the restaurant's real ticket sizes, delivery-app vs. direct pricing, free listing fixes and a short action plan. Use when someone asks for a restaurant health report, a restaurant audit or check-up, or wants to understand a restaurant's online presence, fees or delivery economics. Made by Truvana Tech (truvanatech.com).
+---
+
+# Restaurant Health Report
+
+Someone gives you a restaurant: its name plus a website, address or ordering link. You research it from public sources and return a clear 7-page PDF showing:
+
+- what guests say about it
+- what card fees and delivery apps really cost at its ticket sizes
+- the listing mistakes it can fix this week for free
+
+The person asking may be the owner, a manager, or someone helping them.
+
+The checklist and the report format come from Truvana Tech's 10 years of working with restaurants. Every report carries a small "made with Truvana Tech" footer and links to Truvana's free tools. Those are part of the template; don't add, remove or reword them.
+
+Example output: `examples/sample-falafel/sample-report.pdf`. Its input is `examples/sample-falafel/data.json`. Read both before your first report. The sample restaurant is **fictional**; real reports never contain invented facts.
+
+## Rules
+
+1. **Only report what you saw yourself.** Every fact must come from a page you actually opened in this session, and you must record its URL in `evidence.md`.
+   - A search-result snippet is not a source. Open the page, or leave the fact out.
+   - If you couldn't open a page (it was blocked, needed a login or didn't load), say so. Don't guess what it says.
+2. **Tag certainty honestly.** Every row in the snapshot facts table gets a status:
+   - `verified` or `public`: you saw it.
+   - `verify`: it's partly visible or may be out of date, so it needs confirming.
+   - `not_confirmed`: it's an inference, for example "this POS is likely".
+   - `not_public`: it can't be known from outside.
+   - `client`: the person asking told you. Set `tag` to "From owner" or "From you".
+3. **Don't invent prices or claims about any company.** That includes POS vendors, processors, delivery apps and Truvana Tech. Example rates such as "2.6% + 15¢" must be labelled as examples.
+4. **Browse, never transact.** You may browse menus and pick a location on an ordering site to see its prices.
+   - Never add to cart past the point of seeing a price.
+   - Never check out, sign in, create an account or enter personal details.
+   - Never solve a CAPTCHA or bypass a bot check. If a site blocks you, skip it and note that.
+5. **Let the scripts do the arithmetic.** Put raw prices and counts in `data.json`, and let `scripts/build_report.py` compute rates, markups and commissions.
+   - Copy its printed "computed numbers" into any prose that repeats them, such as cover KPIs and headlines. Never compute those by hand, not even "roughly a sixth".
+   - The build prints **CHECK THESE NUMBERS** for any `$` or `%` in your text that isn't a data.json input or a computed value. For each one, either replace it with a computed value or confirm it's copied from evidence, for example Google's "$10–20 per person".
+6. **Write in plain English for a restaurant owner.** Use short sentences and concrete numbers. Don't use hype or jargon, and never talk down to the owner ("you're overpaying"). Show the arithmetic and let the numbers speak. Write in English unless the person asks otherwise.
+
+## Workflow
+
+### 1. Set up
+
+Make a working folder named after the restaurant, for example `health-reports/<restaurant-slug>/`. Copy `examples/sample-falafel/data.json` into it as a starting point and delete its `"sample": true` line. Create `evidence.md` from `references/evidence-template.md`.
+
+Ask the person only if you can't find the restaurant at all. Otherwise start. Record anything they told you as `client` facts, such as "it's a franchise location" or "I'm the owner".
+
+### 2. Research
+
+Follow `references/research-playbook.md`. It lists every source, what to capture from each, and where sites block automated fetching.
+
+Use a real browser tool if you have one (Claude in Chrome, the Codex browser and so on). Delivery apps, Yelp and Google Maps often refuse plain HTTP fetches.
+
+Record everything in `evidence.md` as you go: the URL, what you saw, and the date.
+
+### 3. Find the main finding
+
+Before writing, decide the one-sentence bottom line. Look at what the data actually says:
+
+- **Small tickets ($3–$12 items).** The fixed per-sale card fee is most of the cost, so the card-fee page matters most. This is the sample report's story.
+- **Mid or large tickets ($14+).** The percentage is most of the fee, so the rate, the monthly fees and the contract matter more than the cents. The script switches the card-fee box and the savings table automatically when the fixed share is under 50%.
+- **Direct ordering exists and is cheaper, but hidden.** Guests order on the apps at higher prices, or the listing is exclusive to one app. Delivery economics and making direct ordering the default matter most.
+- **No direct ordering at all.** Show what the apps keep per order.
+- **Wrong phone, hours or name across listings.** The free fixes come first, since they're the easiest wins.
+- **Weak or uneven ratings.** Report the recurring themes honestly. Suggest operational fixes only where the reviews point to them.
+- **Franchise or multi-unit store.** Note which systems the brand seems to mandate and which look like the operator's choice. If one location runs a different POS or ordering system from its sister stores, note it: the location is probably run separately.
+
+Pick a cover headline that is short, true and specific. For example: "The demand is proven. The margin is in the small print."
+
+### 4. Write `data.json`, in two passes
+
+The schema, with length budgets per field, is in `references/data-schema.md`. The sections are `cover`, `snapshot`, `demand`, `card_fees`, `delivery`, `fixes` and `plan`.
+
+Leave out a section you have no data for. For example, drop `delivery` if the store isn't on any app; pages renumber automatically. Every `sources` line must name the pages behind that page's numbers.
+
+1. **Numbers first.** Fill in the raw inputs: ratings, prices, tickets and delivery items. Use short placeholder titles and KPIs, then run `build_report.py` once and read the computed numbers.
+2. **Then the prose.** Write titles, KPIs, the summary and fixes using those exact computed values.
+
+### 5. Build and render
+
+```bash
+python3 <skill-dir>/scripts/build_report.py health-reports/<slug>/data.json
+python3 <skill-dir>/scripts/render_pdf.py health-reports/<slug>/report.html --preview
+```
+
+`render_pdf.py` uses Chrome, Edge or Chromium in headless mode, falling back to WeasyPrint. It measures every page and exits with code 2 (**OVERFLOW**, naming the page) when text runs into the sources line or footer, past the margin, or out of the cover title block. Pages have a fixed size, so overflow is clipped rather than adding pages; that is why the measurement matters. Shorten the text on the named page and run both commands again until it prints **OK**.
+
+Open the PDF, or `preview.png`, and look at every page before you deliver.
+
+### 6. Self-check
+
+Run every item in `references/qa-checklist.md`. The ones that matter most:
+
+- Every number in the prose matches the computed numbers and the evidence.
+- No fact rests only on a search snippet.
+- The statuses are honest.
+- No page overflows.
+- The restaurant's name and address are spelled exactly as on its own site. If the site's location name differs from the postal city (for example a neighborhood name), use the site's name in `area_label` and the postal address in `address`.
+
+### 7. Deliver
+
+Give the person:
+
+- the PDF path
+- a 5-line summary: the headline, the 3 strongest findings and the first question to answer
+- a short **"double-check"** list covering anything tagged `verify`, anything you couldn't open, and anything that changes by day (hours, prices)
+
+Keep `evidence.md` next to the PDF.
+
+## Files
+
+| Path | What it is |
+|------|-----------|
+| `scripts/build_report.py` | data.json → self-contained report.html (fonts and logos embedded), prints the computed numbers |
+| `scripts/render_pdf.py` | report.html → PDF, with a layout check and a `--preview` PNG |
+| `references/research-playbook.md` | Sources to check, what to capture, blocking quirks |
+| `references/data-schema.md` | Every field, with length budgets that keep pages from overflowing |
+| `references/state-rules.md` | DC / MD / VA cash and card-surcharge rules |
+| `references/qa-checklist.md` | Pre-delivery checklist |
+| `references/evidence-template.md` | Template for the evidence log |
+| `examples/sample-falafel/` | A complete fictional example (data, PDF) |
