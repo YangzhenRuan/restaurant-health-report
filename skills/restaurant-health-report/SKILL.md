@@ -17,6 +17,8 @@ The person asking may be the owner, a manager, or someone helping them.
 
 **It's a check-up, not a full service.** Say what the public evidence shows and stop there. Every report ends with an offer from Truvana Tech's team to meet and go deeper. That offer, the footer and the free-tool links are part of the template; don't add, remove or reword them.
 
+**In a chat AI?** If you are ChatGPT, Gemini, Claude.ai, DeepSeek, Kimi or any chat that can't run this skill's Python scripts, read the Rules and "Where to start" below, then follow `references/chat-mode.md` (https://raw.githubusercontent.com/YangzhenRuan/restaurant-health-report/main/skills/restaurant-health-report/references/chat-mode.md). It gives the steps, the arithmetic, the fallbacks and a ready-made HTML or Markdown report template.
+
 Example output: `examples/sample-falafel/sample-report.pdf`. Its input is `examples/sample-falafel/data.json`. Read both before your first report. The sample restaurant is **fictional**; real reports never contain invented facts.
 
 ## Rules
@@ -49,7 +51,7 @@ Never stop because a capability is missing. Use the fallback, say which one you 
 | A browser tool (sites block plain fetches) | Use web search results. Mark facts from a result snippet "verify" and name the page. |
 | Web search too | Ask the person for the restaurant's website, Google rating and review count, and a few menu prices. What they don't give is `not_public` or left out. |
 | A page won't open | Skip it, list it under "Could not open" in `evidence.md`. |
-| Python | Write the report as Markdown with the same seven parts and the same honesty rules. Skip the PDF. |
+| Python | Follow `references/chat-mode.md`: fill `templates/chat-report.html` (or `.md` if you can only write text). |
 | Chrome, Edge or WeasyPrint | Deliver `report.html`. It's self-contained and prints to PDF from any browser. |
 | The owner's statement | Use the 2.6% + 15¢ example, labelled as an example, and ask for two numbers: last month's card sales and total fees. |
 | Delivery-app listings | Drop the `delivery` section. Pages renumber themselves. |
@@ -157,3 +159,5 @@ Keep `evidence.md` next to the PDF.
 | `references/qa-checklist.md` | Pre-delivery checklist |
 | `references/evidence-template.md` | Template for the evidence log |
 | `examples/sample-falafel/` | A complete fictional example (data, PDF) |
+| `references/chat-mode.md` | How to make the report in a chat AI without the scripts |
+| `templates/chat-report.html`, `templates/chat-report.md` | Report templates for chat mode, with the fixed Truvana Tech lines |

@@ -27,9 +27,9 @@ Works with **Claude Code** and **OpenAI Codex**. Free and open source.
 
 ## No install: use the prompt
 
-Owners don't need to install anything. Copy the free prompt at **[truvanatech.com/tools/restaurant-health-report](https://truvanatech.com/tools/restaurant-health-report?utm_source=github&utm_medium=readme&utm_campaign=restaurant-health-report)** and paste it into ChatGPT, Claude, Gemini, DeepSeek, Kimi or any AI with web search. You can add last month's card sales and fees there to get your real effective rate.
+Owners don't need to install anything. Copy the free prompt at **[truvanatech.com/tools/restaurant-health-report](https://truvanatech.com/tools/restaurant-health-report?utm_source=github&utm_medium=readme&utm_campaign=restaurant-health-report)** and paste it into ChatGPT, Claude, Gemini, DeepSeek, Kimi or any AI that can open links. You can add your processor, POS and last month's card sales and fees there.
 
-The skill below makes the full branded PDF and is for people who use Claude Code or Codex.
+The prompt points the AI at this skill. A chat AI follows the skill's **chat mode** ([references/chat-mode.md](skills/restaurant-health-report/references/chat-mode.md)): the same rules and fallbacks, with the arithmetic done step by step and a ready-made HTML or Markdown report. Installed in Claude Code or Codex, the skill makes the full 7-page PDF.
 
 ## Install
 
