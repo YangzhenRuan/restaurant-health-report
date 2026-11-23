@@ -253,7 +253,13 @@
     "rules_title": "DC rules to work within",
     "rules_text": "DC businesses must take cash (since Jan. 1, 2025). A card surcharge is allowed only if every fee is disclosed clearly before the guest orders. On a $4 item, a visible surcharge reads as a price increase, so lowering the cost is usually the better move than passing it on.",
     "unknowns_text": "The real rate, the cents per sale, monthly and PCI fees, keyed-in sales, the contract end date and any equipment lease. All of it is on one monthly statement, and the franchise agreement says whether processing is the owner's choice.",
-    "sources": "FICTIONAL SAMPLE: restaurant, names, phone numbers and figures are invented to show the format. Real reports cite every source."
+    "sources": "FICTIONAL SAMPLE: restaurant, names, phone numbers and figures are invented to show the format. Real reports cite every source.",
+    "actual": {
+      "monthly_sales": 38000,
+      "monthly_fees": 1406,
+      "transactions": 4100,
+      "processor": "a flat-rate processor"
+    }
   },
   "delivery": {
     "title": "A flat 49¢ markup can't cover a percentage commission.",
@@ -409,26 +415,30 @@
         "signal": "strong",
         "why": "Small tickets: at a common 2.6% + 15¢, a $4.00 sale pays 6.35%, and 59% of that fee is the fixed cents.",
         "next": "read one statement for the real rate and cents per sale.",
-        "tool": "card-fee-calculator"
+        "tool": "card-fee-calculator",
+        "area": "payments"
       },
       {
         "question": "Cut delivery-app costs?",
         "signal": "some",
         "why": "Mains carry a flat 49¢ app markup; sides and the $44.99 platter carry none, so the full commission comes out of margin.",
         "next": "price apps by percentage and point regulars to pickup.",
-        "tool": "delivery-app-commission-calculator"
+        "tool": "delivery-app-commission-calculator",
+        "area": "delivery"
       },
       {
         "question": "Add a self-order kiosk to save labor?",
         "signal": "unknown",
         "why": "Reviews praise fast service and call the shop very small. Order counts and staffing aren't public.",
-        "next": "count peak-hour orders and staff per shift before deciding."
+        "next": "count peak-hour orders and staff per shift before deciding.",
+        "area": "kiosk"
       },
       {
         "question": "Get help with reviews and reputation?",
         "signal": "low",
         "why": "4.7★ on 2,097 Google reviews, first of 5 nearby on rating. The weak spot is listings, not reviews.",
-        "next": "fix the phone and hours mismatches (page 6)."
+        "next": "fix the phone and hours mismatches (page 6).",
+        "area": "reputation"
       }
     ]
   }

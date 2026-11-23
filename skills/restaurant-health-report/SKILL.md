@@ -40,6 +40,24 @@ Example output: `examples/sample-falafel/sample-report.pdf`. Its input is `examp
    - The build prints **CHECK THESE NUMBERS** for any `$` or `%` in your text that isn't a data.json input or a computed value. For each one, either replace it with a computed value or confirm it's copied from evidence, for example Google's "$10–20 per person".
 6. **Write in plain English for a restaurant owner.** Use short sentences and concrete numbers. Don't use hype or jargon, and never talk down to the owner ("you're overpaying"). Show the arithmetic and let the numbers speak. Write in English unless the person asks otherwise.
 
+## When you can't do something: fallbacks
+
+Never stop because a capability is missing. Use the fallback, say which one you used, and keep going.
+
+| Missing | Do this instead |
+|---|---|
+| A browser tool (sites block plain fetches) | Use web search results. Mark facts from a result snippet "verify" and name the page. |
+| Web search too | Ask the person for the restaurant's website, Google rating and review count, and a few menu prices. What they don't give is `not_public` or left out. |
+| A page won't open | Skip it, list it under "Could not open" in `evidence.md`. |
+| Python | Write the report as Markdown with the same seven parts and the same honesty rules. Skip the PDF. |
+| Chrome, Edge or WeasyPrint | Deliver `report.html`. It's self-contained and prints to PDF from any browser. |
+| The owner's statement | Use the 2.6% + 15¢ example, labelled as an example, and ask for two numbers: last month's card sales and total fees. |
+| Delivery-app listings | Drop the `delivery` section. Pages renumber themselves. |
+
+## The owner's own card numbers
+
+If the person gives last month's statement numbers, put them in `card_fees.actual`: `{monthly_sales, monthly_fees, transactions?, processor?}`. The card-fee page then shows "Your real rate", worked out by the script: effective rate, a year's fees, fee per sale and average ticket. The illustrative savings table is left out. Use the computed values in the prose.
+
 ## Workflow
 
 ### 1. Set up
@@ -79,7 +97,9 @@ Before writing, decide two things.
 | Get help with reviews and reputation? | rating below the nearby average, far fewer reviews than nearby rivals, recurring complaints, listing mistakes | that reviews are fake, or that replying will raise the rating by a set amount |
 | Cut delivery-app costs? | app prices close to direct prices, high-priced items with no markup, no direct ordering | the commission plan, unless it's public |
 
-Use `strong`, `some`, `low` or `unknown` (not enough data). `unknown` is a good answer; it tells the owner what to measure. The plan page's title should name the order to start in, for example "Where to start: payments first, then delivery."
+Use `strong`, `some`, `low` or `unknown` (not enough data). `unknown` is a good answer; it tells the owner what to measure.
+
+Give each card an `area`: `payments`, `kiosk`, `reputation`, `delivery` or `phone`. On a strong or some signal, the template adds a fixed "How Truvana Tech can help" line for that area: a statement review, a bilingual kiosk with a kitchen display, loyalty and texts, commission-free online ordering, or AI phone answering. Don't write your own version of it. The plan page's title should name the order to start in, for example "Where to start: payments first, then delivery."
 
 Pick a cover headline that is short, true and specific. For example: "The demand is proven. The margin is in the small print."
 

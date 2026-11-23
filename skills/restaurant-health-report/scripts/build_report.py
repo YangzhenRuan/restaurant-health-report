@@ -41,6 +41,15 @@ CTA_PLAN_TITLE = "Want a deeper look?"
 CTA_PLAN_TEXT = ("This report is a quick check-up from public information, not a full analysis. Truvana Tech built it "
                  "from conversations with 6,000+ merchants. For a deeper look, our team is happy to meet with you, "
                  "walk through your restaurant together and suggest what to improve first.")
+# What Truvana Tech offers, by "where to start" area (truvanatech.com). Shown under a card whose
+# signal is strong or some. Template text: a report can't add to it or reword it.
+SOLUTIONS = {
+    "payments": "a free statement review, every fee explained and a written quote, no equipment lease.",
+    "kiosk": "a bilingual self-order kiosk and a kitchen display (KDS) connected to the POS.",
+    "reputation": "loyalty points, gift cards and texts that bring guests back (the listing fixes are free).",
+    "delivery": "online ordering on the restaurant's own website and app, with no commission per order.",
+    "phone": "AI phone answering in English and Spanish, so no order is missed.",
+}
 SIGNALS = {"strong": ("Strong signal", "sig-strong"), "some": ("Some signal", "sig-some"),
            "low": ("Low signal", "sig-low"), "unknown": ("Not enough data", "sig-unknown")}
 
@@ -396,7 +405,8 @@ def sec_card_fees(d):
              f'<p style="color:#C6D0EF">{round(fx * 100):g}¢ of the {small[2] * 100:.1f}¢ fee. {esc(box_note)}</p></div>')
     body = f'<div class="grid2" style="grid-template-columns:1.45fr 1fr;margin-bottom:12pt">{left}{right}</div>'
     sv = d.get("savings") or {}
-    mode = sv.get("mode") or ("cents" if share >= 50 else "percent")
+    # With the owner's real numbers (card_fees.actual) the illustrative table gives way to them.
+    mode = sv.get("mode") or ("none" if d.get("actual") else "cents" if share >= 50 else "percent")
     savings_out = {}
     if mode == "cents":
         vols = sv.get("volumes") or d.get("volumes") or [{"label": "Slow month", "count": 1500}, {"label": "Steady month", "count": 3000}, {"label": "Busy month", "count": 4500}]
@@ -421,6 +431,23 @@ def sec_card_fees(d):
             savings_out[v["label"]] = {"per_month": money(m), "per_year": money(y)}
         body += (f'<table class="data" style="margin-bottom:12pt"><tr><th>What {pts:g} percentage points is worth</th>'
                  f'<th>Card sales / month</th><th>Per month</th><th>Per year</th></tr>{trs}</table>')
+    actual = d.get("actual")
+    actual_out = {}
+    if actual:
+        a_sales, a_fees = float(actual["monthly_sales"]), float(actual["monthly_fees"])
+        if not (a_sales > 0 and 0 <= a_fees <= a_sales):
+            raise SystemExit("data.json: card_fees.actual needs monthly_sales > 0 and 0 <= monthly_fees <= monthly_sales")
+        a_rate = 100 * a_fees / a_sales
+        a_tx = float(actual.get("transactions") or 0)
+        bits = [f"{pct(a_rate)} effective rate", f"{money(a_fees * 12)} a year"]
+        if a_tx > 0:
+            bits += [f"{money(a_fees / a_tx)} per card sale", f"{money(a_sales / a_tx)} average ticket"]
+        who = f" · processed by {esc(actual['processor'])}" if actual.get("processor") else ""
+        body += (f'<div class="callout" style="margin-bottom:12pt"><div class="lbl">Your real rate</div>'
+                 f'<div class="q">{money(a_fees)} in fees on {money(a_sales)} of card sales last month: '
+                 f'<b>{" · ".join(bits)}</b>{who}. From the owner\'s statement.</div></div>')
+        actual_out = {"effective": pct(a_rate), "per_year": money(a_fees * 12),
+                      "per_sale": money(a_fees / a_tx) if a_tx > 0 else None, "average_ticket": money(a_sales / a_tx) if a_tx > 0 else None}
     rules = card(d.get("rules_title", "Local rules to work within"), need(d, "rules_text", "card_fees"), "navy")
     unknown = card("What public data can't show", need(d, "unknowns_text", "card_fees"), "orange")
     body += f'<div class="grid2" style="margin-bottom:12pt">{rules}{unknown}</div>'
@@ -429,7 +456,7 @@ def sec_card_fees(d):
     out = {"rate_label": rate_label, "smallest_ticket": money(small[1]), "smallest_effective": pct(small[3]),
            "fixed_share_smallest": f"{share:.0f}%", "by_ticket": {money(c[1]): pct(c[3]) for c in calc},
            "fixed_share_by_ticket": {money(c[1]): f"{100 * fx / c[2]:.0f}%" for c in calc},
-           "savings_mode": mode, "savings": savings_out}
+           "savings_mode": mode, "savings": savings_out, "actual": actual_out}
     return body, out
 
 
@@ -523,8 +550,13 @@ def sec_plan(d):
     cards_html = ""
     for w in where[:4]:
         label, cls = SIGNALS.get(w.get("signal", "unknown"), SIGNALS["unknown"])
+        area = w.get("area")
+        if area and area not in SOLUTIONS:
+            raise SystemExit(f"data.json: where_to_start area '{area}' is not one of {sorted(SOLUTIONS)}")
+        helps = (f'<p class="nx" style="margin-top:3pt"><b>How Truvana Tech can help:</b> {esc(SOLUTIONS[area])}</p>'
+                 if area and w.get("signal") in ("strong", "some") else "")
         cards_html += (f'<div class="card"><span class="sig {cls}">{label}</span><h3>{md(w["question"])}</h3>'
-                       f'<p>{md(w["why"])}</p><p class="nx"><b>First step:</b> {md(w["next"])}{tool_link(w)}</p></div>')
+                       f'<p>{md(w["why"])}</p><p class="nx"><b>First step:</b> {md(w["next"])}{tool_link(w)}</p>{helps}</div>')
     body = f'<div class="where">{cards_html}</div>'
     qs = "".join(f"<li>{md(q)}</li>" for q in need(d, "questions", "plan"))
     body += (f'<div class="grid2" style="grid-template-columns:1.15fr 1fr;margin-top:4pt">'
