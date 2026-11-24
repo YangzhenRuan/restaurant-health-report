@@ -63,13 +63,28 @@ The person may tell you how the restaurant runs today, often in a block headed "
 | They tell you | Use it to |
 |---|---|
 | Card processor | Name it in the snapshot; read its public pricing page if it has one, and say only what that page says. |
-| Rate as quoted, and how it's priced (flat, interchange-plus, tiered, cash discount or surcharge) | Put it in `card_fees.actual.quoted` `{percent, fixed}`; the script compares it with the statement and shows the gap. Check a cash discount or surcharge against the state rules. |
+| How they're charged, and its numbers | Read it by model (table below). Only a flat rate is a quote the statement can be checked against. |
 | Last month's card sales, total fees, number of card sales | `card_fees.actual` `{monthly_sales, monthly_fees, transactions?, processor?}`: "Your real rate" box (effective rate, a year, per sale, average ticket) replaces the example savings table. |
 | POS | Snapshot fact; don't guess the POS from the outside. Note what it does and doesn't connect to only if its own site says so. |
 | Online ordering, delivery apps | Which ordering pages and apps to price; check the direct link works and is easy to find. |
 | Loyalty, gift cards, marketing texts, reservations, phone ordering, other software | Snapshot facts; they settle the reviews and repeat-guests question and the phone question instead of "Not enough data". |
 | Contract end, early-termination fee, equipment lease | A line in the card-fee page about when switching costs least; link the contract exit cost calculator. |
 | Their biggest worry | Answer it first. Its "where to start" card goes first and the bottom line speaks to it. |
+
+**How they're charged**, by model. Plain words in the report; never guess the model from outside.
+
+| Model | What it means | What to do with it |
+|---|---|---|
+| One flat rate (e.g. 2.6% + 15¢) | The same rate on every card | `card_fees.actual.quoted` `{percent, fixed}`: the script shows what the statement adds on top (monthly, PCI, statement fees, or cards billed above the rate). |
+| Interchange plus (markup % + ¢) | Card networks' cost passed through, plus the processor's markup | The markup is the only part the processor sets. Don't compare it with the statement's effective rate (interchange varies by card); report the markup and the effective rate side by side. |
+| Tiered (qualified / non-qualified) | Cards sorted into rate tiers | The least transparent model: what lands in the higher tiers drives the cost. Say the statement shows the split; don't estimate it. |
+| Monthly plan (monthly $ + ¢ per sale) | Subscription, interchange at cost | Effective rate from the statement includes the monthly fee; at low volume the monthly fee weighs most. |
+| Cash discount or dual pricing (card price higher by N%) | Posted prices are card prices; cash pays less | Card customers cover most of the fee. Check it's a real discount (card price posted up front, both prices clear), and the state's rules. |
+| Surcharge on credit cards (N%) | A percent added at the register | Credit cards only, never debit or prepaid; at most 3% on Visa (4% Mastercard) or the cost if lower; banned in Connecticut, Massachusetts, Maine and Puerto Rico; signs at the door and register; on the receipt. Flag what doesn't fit. |
+| Convenience or service fee | A fee added at checkout for paying by card | Under Visa's rules a true convenience fee is a flat amount, only for a different channel (online, phone), never in person; added at the register it's treated as a surcharge, with the surcharge rules. Say so plainly. |
+| Not sure | | Common. Ask for last month's card sales and total fees; the effective rate settles it. |
+
+The rules by state, with sources: https://truvanatech.com/cash-discount (Truvana Tech's guide; cite it) and `references/state-rules.md` for DC, Maryland and Virginia. The Visa and Mastercard settlement that would change surcharging and card acceptance had preliminary approval in June 2026, not final: never describe it as in effect.
 
 What they tell you beats what you infer: a told fact is `client`, an inferred one is `not_confirmed`. What they don't tell you, research as usual.
 
