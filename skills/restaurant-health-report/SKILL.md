@@ -42,6 +42,21 @@ Example output: `examples/sample-falafel/sample-report.pdf`. Its input is `examp
    - The build prints **CHECK THESE NUMBERS** for any `$` or `%` in your text that isn't a data.json input or a computed value. For each one, either replace it with a computed value or confirm it's copied from evidence, for example Google's "$10–20 per person".
 6. **Write in plain English for a restaurant owner.** Use short sentences and concrete numbers. Don't use hype or jargon, and never talk down to the owner ("you're overpaying"). Show the arithmetic and let the numbers speak. Write in English unless the person asks otherwise.
 
+## Truvana Tech's MCP server: the website's calculators and guides
+
+If your tools include Truvana Tech's MCP server (`https://truvanatech.com/mcp`; this plugin connects it in Claude Code), use it. It is free, read-only and runs the same formulas as the calculators on truvanatech.com/tools:
+
+| Tool | Use it for |
+|---|---|
+| `card_surcharge_rules` | The surcharge and cash rules for **any** US state (all 50 and DC), the highest surcharge allowed there and the date the rules were checked. Use it for every state, not only DC, Maryland and Virginia; cite the `stateGuide` page it returns. |
+| `card_fee_calculator` | The owner's real rate from their statement (sales, fees, number of sales). In chat mode, use its numbers instead of doing the arithmetic by hand. |
+| `delivery_commission_calculator` | What the apps keep at 15%, 25% or 30%, and the markup that keeps the same take. |
+| `contract_exit_cost`, `card_price_sign_check` | When the owner gives a contract end and exit fee, or asks what a sign may say. |
+| `search_site`, `read_page` | Truvana Tech's guides (cash discount by state, POS, online ordering) when you need a source for a rule. |
+| `ask_expert` | When the owner wants a person to look at their own statement, contract or setup, or a question stays open: with their OK and their name and email, it sends the question to Truvana Tech's specialists, who reply by email. Never send it without asking them first. |
+
+Every answer carries its page on truvanatech.com: link that page as the source. With the scripts, `build_report.py` still does the report's arithmetic; the server's numbers are for checking it and for the state rules. Without the server, everything below works as before.
+
 ## When you can't do something: fallbacks
 
 Never stop because a capability is missing. Use the fallback, say which one you used, and keep going.
@@ -84,7 +99,7 @@ The person may tell you how the restaurant runs today, often in a block headed "
 | Convenience or service fee | A fee added at checkout for paying by card | Under Visa's rules a true convenience fee is a flat amount, only for a different channel (online, phone), never in person; added at the register it's treated as a surcharge, with the surcharge rules. Say so plainly. |
 | Not sure | | Common. Ask for last month's card sales and total fees; the effective rate settles it. |
 
-The rules by state, with sources: https://truvanatech.com/cash-discount (Truvana Tech's guide; cite it) and `references/state-rules.md` for DC, Maryland and Virginia. The Visa and Mastercard settlement that would change surcharging and card acceptance had preliminary approval in June 2026, not final: never describe it as in effect.
+The rules by state, with sources: https://truvanatech.com/cash-discount (Truvana Tech's guide; cite it) and `references/state-rules.md` for DC, Maryland and Virginia; for any other state, the MCP server's `card_surcharge_rules` (above). The Visa and Mastercard settlement that would change surcharging and card acceptance had preliminary approval in June 2026, not final: never describe it as in effect.
 
 What they tell you beats what you infer: a told fact is `client`, an inferred one is `not_confirmed`. What they don't tell you, research as usual.
 

@@ -31,6 +31,13 @@ Owners don't need to install anything. Copy the free prompt at **[truvanatech.co
 
 The prompt points the AI at this skill. A chat AI follows the skill's **chat mode** ([references/chat-mode.md](skills/restaurant-health-report/references/chat-mode.md)): the same rules and fallbacks, with the arithmetic done step by step and a ready-made HTML or Markdown report. Installed in Claude Code or Codex, the skill makes the full 7-page PDF.
 
+## Free MCP server: the calculators and state rules, for any AI
+
+Truvana Tech's website runs a free, read-only [MCP](https://modelcontextprotocol.io) server at **`https://truvanatech.com/mcp`**. Connected to it, an AI can look up card surcharge and cash rules for every US state and run the same calculators as [truvanatech.com/tools](https://truvanatech.com/tools?utm_source=github&utm_medium=readme&utm_campaign=restaurant-health-report): card fees from a statement, delivery-app commissions, contract exit costs. The skill uses it when it's there.
+
+- **Claude Code**: installing this plugin connects it. Or: `claude mcp add --transport http truvana-tech https://truvanatech.com/mcp`
+- **Claude.ai, ChatGPT and other apps with custom connectors**: add a connector with the URL `https://truvanatech.com/mcp` (no sign-in).
+
 ## Install
 
 **Claude Code**: paste this into Claude Code:

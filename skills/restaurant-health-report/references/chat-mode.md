@@ -20,7 +20,7 @@ The files, as full links (open them as written):
 ## Steps
 
 1. **Research.** Search the web and open the pages: the restaurant's own site and ordering page, Google listing, Yelp, the delivery apps, and 3 to 5 nearby restaurants of the same kind. Keep a list of every link you used.
-2. **Do the arithmetic, showing each step** (you have no script to do it):
+2. **Do the arithmetic, showing each step** (you have no script to do it). **Connected to Truvana Tech's MCP server** (`https://truvanatech.com/mcp`, tools `card_fee_calculator`, `card_surcharge_rules`, `delivery_commission_calculator`, `contract_exit_cost`)? Call those instead and quote their numbers and the page each returns; `card_surcharge_rules` also has the rules for every state. Otherwise:
    - Effective card rate = monthly fees ÷ monthly card sales × 100. A year = monthly fees × 12. Per sale = monthly fees ÷ number of card sales. Average ticket = card sales ÷ number of card sales.
    - How they're charged decides how to read the numbers (table "How they're charged" in SKILL.md): only a flat rate is compared with the statement; interchange plus shows its markup beside the effective rate; a surcharge, cash discount, dual pricing or convenience fee is checked against the card and state rules (https://truvanatech.com/cash-discount).
    - With a quoted flat rate (say 2.5% + 8¢): fees at that rate = card sales × 0.025 + number of card sales × 0.08. Gap = actual fees − that, and × 12 for a year. A gap is usually monthly, PCI or statement fees, or cards billed above the quoted rate; say only that, not which.
