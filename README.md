@@ -38,6 +38,8 @@ Truvana Tech's website runs a free, read-only [MCP](https://modelcontextprotocol
 - **Claude Code**: installing this plugin connects it. Or: `claude mcp add --transport http truvana-tech https://truvanatech.com/mcp`
 - **Claude.ai, ChatGPT and other apps with custom connectors**: add a connector with the URL `https://truvanatech.com/mcp` (no sign-in).
 
+Tools, example questions and setup for every app: [truvana-tech-mcp](https://github.com/YangzhenRuan/truvana-tech-mcp).
+
 ## Install
 
 **Claude Code**: paste this into Claude Code:
